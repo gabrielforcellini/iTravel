@@ -64,27 +64,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="46dp">
+        android:layout_marginBottom="46dp"
+        android:weightSum="100">
 
         <TextView
             android:id="@+id/link_esqueceu_senha"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Esqueci minha senha"
             android:textColor="@color/white"
             android:clickable="true"
-            android:gravity="start"
-            android:textSize="16sp"
-            android:layout_marginEnd="146dp"/>
+            android:layout_weight="50"
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/link_criar_conta"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Criar Conta"
+            android:layout_weight="50"
             android:textColor="@color/white"
             android:clickable="true"
-            android:gravity="end"
+            android:textAlignment="textEnd"
             android:textSize="16sp"/>
     </LinearLayout>
 
