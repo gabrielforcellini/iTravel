@@ -97,17 +97,36 @@
         android:inputType="none"
         android:layout_marginBottom="46dp"/>
 
-    <Button
-        android:id="@+id/btn_next"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="PRÓXIMO"
-        android:textColor="@android:color/black"
-        android:backgroundTint="@color/light_gray_dark"
-        android:layout_gravity="center_horizontal"
-        />
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/btn_voltar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VOLTAR"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/light_gray_dark"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="50"
+            />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="PRÓXIMO"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/light_gray_dark"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="50"
+            />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
