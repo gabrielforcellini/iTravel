@@ -8,19 +8,18 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GasolinaActivity extends AppCompatActivity {
-
+public class ResultadoActivity extends AppCompatActivity {
     private Button btn_next;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gasolina);
+        setContentView(R.layout.activity_resultado);
 
         btn_next = findViewById(R.id.btn_next);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(GasolinaActivity.this, ControleGastosActivity.class));
+                startActivity(new Intent(ResultadoActivity.this, GasolinaActivity.class));
             }
         });
     }

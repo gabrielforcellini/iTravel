@@ -12,74 +12,54 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/lbl_viajantes"
+        android:id="@+id/lbl_controle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Viajantes"
-        android:textSize="20sp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/white"/>
-
-    <EditText
-        android:id="@+id/edt_viajantes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray_dark"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/lbl_qtd_dias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dias"
-        android:textSize="20sp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/white"/>
-
-    <EditText
-        android:id="@+id/edt_qtd_dias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray_dark"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/lbl_meio_locomocao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Qual o meio de locomoção?"
+        android:text="Controle de gastos"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_marginBottom="16dp"/>
 
     <RadioGroup
-        android:id="@+id/rgp_locomocao"
+        android:id="@+id/rgp_controle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="54dp">
 
         <RadioButton
-            android:id="@+id/radio_btn_aviao"
+            android:id="@+id/radio_btn_gasolina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Avião"
+            android:text="Gasolina"
             android:textColor="@color/white"/>
 
         <RadioButton
-            android:id="@+id/radio_btn_carro"
+            android:id="@+id/radio_btn_tarifa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Carro"
+            android:text="Tarifa Aérea"
             android:textColor="@color/white"/>
 
         <RadioButton
-            android:id="@+id/radio_btn_onibus"
+            android:id="@+id/radio_btn_refeicao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ônibus"
+            android:text="Refeições"
+            android:textColor="@color/white"/>
+
+        <RadioButton
+            android:id="@+id/radio_btn_hospedagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospedagem"
+            android:textColor="@color/white"/>
+
+        <RadioButton
+            android:id="@+id/radio_btn_entretenimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entretenimento"
             android:textColor="@color/white"/>
 
     </RadioGroup>
@@ -108,7 +88,5 @@
         android:textSize="20sp"
         android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"/>
-
-
 
 </LinearLayout>
