@@ -44,6 +44,22 @@
             android:name=".ResultadoActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".TarifaAereaActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".RefeicoesActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".EntretenimentoActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".HospedagemActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

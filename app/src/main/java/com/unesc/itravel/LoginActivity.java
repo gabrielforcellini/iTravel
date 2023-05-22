@@ -1,5 +1,6 @@
 package com.unesc.itravel;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(LoginActivity.this, Dados1Activity.class));
             }
         });
     }
