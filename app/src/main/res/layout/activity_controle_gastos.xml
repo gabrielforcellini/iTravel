@@ -20,49 +20,40 @@
         android:textColor="@color/white"
         android:layout_marginBottom="16dp"/>
 
-    <RadioGroup
-        android:id="@+id/rgp_controle"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/check_box_gasolina"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="54dp">
+        android:text="Gasolina"
+        android:textColor="@android:color/white"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_gasolina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gasolina"
-            android:textColor="@color/white"/>
+    <CheckBox
+        android:id="@+id/check_box_tarifa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tarifa Aérea"
+        android:textColor="@android:color/white"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_tarifa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tarifa Aérea"
-            android:textColor="@color/white"/>
+    <CheckBox
+        android:id="@+id/check_box_refeicao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refeições"
+        android:textColor="@android:color/white"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_refeicao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Refeições"
-            android:textColor="@color/white"/>
+    <CheckBox
+        android:id="@+id/check_box_hospedagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospedagem"
+        android:textColor="@android:color/white"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_hospedagem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hospedagem"
-            android:textColor="@color/white"/>
-
-        <RadioButton
-            android:id="@+id/radio_btn_entretenimento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Entretenimento"
-            android:textColor="@color/white"/>
-
-    </RadioGroup>
+    <CheckBox
+        android:id="@+id/check_box_entretenimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entretenimento"
+        android:textColor="@android:color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"

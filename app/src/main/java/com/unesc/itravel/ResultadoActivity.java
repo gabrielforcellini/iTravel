@@ -10,16 +10,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultadoActivity extends AppCompatActivity {
     private Button btn_next;
+    private Button btn_previous;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado);
 
         btn_next = findViewById(R.id.btn_next);
+        btn_previous = findViewById(R.id.btn_previous);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(ResultadoActivity.this, GasolinaActivity.class));
+            }
+        });
+
+        btn_previous.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(ResultadoActivity.this, ControleGastosActivity.class));
             }
         });
     }
