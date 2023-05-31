@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
+import com.unesc.itravel.database.model.Login;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
@@ -18,7 +18,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+        sqLiteDatabase.execSQL(Login.CREATE_TABLE);
     }
 
     @Override

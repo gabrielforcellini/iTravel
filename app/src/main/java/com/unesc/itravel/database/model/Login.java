@@ -1,6 +1,6 @@
 package com.unesc.itravel.database.model;
 
-public class LoginModel {
+public class Login {
 
     public static final String TABLE_NAME = "login";
     public static final String
@@ -23,6 +23,15 @@ public class LoginModel {
             + ");";
 
     public static final String DROP_TABLE = "drop table if exists " + TABLE_NAME +";";
+
+    public Login() {
+    }
+
+    public Login(String nome, String login, String senha) {
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
 
     public long getId() {
         return id;
