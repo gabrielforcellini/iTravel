@@ -7,6 +7,9 @@ import android.database.Cursor;
 import com.unesc.itravel.database.DBOpenHelper;
 import com.unesc.itravel.database.model.Login;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginDAO extends AbstrataDAO {
 
     private static final String[] colunas = {
@@ -26,9 +29,8 @@ public class LoginDAO extends AbstrataDAO {
             Open();
 
             ContentValues contentValues = new ContentValues();
-            contentValues.put(Login.COLUNA_ID, loginModel.getId());
-            contentValues.put(Login.COLUNA_LOGIN, loginModel.getLogin());
             contentValues.put(Login.COLUNA_NOME, loginModel.getNome());
+            contentValues.put(Login.COLUNA_LOGIN, loginModel.getLogin());
             contentValues.put(Login.COLUNA_SENHA, loginModel.getSenha());
 
             rowAffect = db.insert(Login.TABLE_NAME, null, contentValues);
@@ -46,7 +48,7 @@ public class LoginDAO extends AbstrataDAO {
         try {
             Open();
 
-            String selection = Login.COLUNA_LOGIN + " = ?";
+            String selection = Login.COLUNA_LOGIN + "=?";
             String[] selectionArgs = {login};
 
             cursor = db.query(Login.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
@@ -59,10 +61,11 @@ public class LoginDAO extends AbstrataDAO {
 
                 log = new Login();
 
-                log.setLogin(usuario);
-                log.setSenha(senha);
                 log.setId(id);
                 log.setNome(nome);
+                log.setLogin(usuario);
+                log.setSenha(senha);
+
             }
         }
         finally {
@@ -76,5 +79,49 @@ public class LoginDAO extends AbstrataDAO {
         }
 
         return log;
+    }
+
+    public List<Login> selectAll() {
+        List<Login> login = new ArrayList<>();
+        try {
+            Open();
+
+            Cursor cursor = db.query(Login.TABLE_NAME, colunas, null, null, null, null, null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()){
+                login.add(CursorToStructure(cursor));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        finally {
+          Close();
+        }
+
+        return (login);
+    }
+
+    public void delete(final long idLogin){
+        Open();
+        db.delete(Login.TABLE_NAME, Login.COLUNA_ID + " =?", new String[]{""+idLogin});
+        Close();
+    }
+
+    public void deleteAll(){
+        Open();
+        db.delete(Login.TABLE_NAME, null, null);
+        Close();
+    }
+
+    public final Login CursorToStructure(Cursor cursor){
+        Login login = new Login();
+
+        login.setId(cursor.getLong(0));
+        login.setNome(cursor.getString(1));
+        login.setLogin(cursor.getString(2));
+        login.setSenha(cursor.getString(3));
+
+        return (login);
     }
 }
