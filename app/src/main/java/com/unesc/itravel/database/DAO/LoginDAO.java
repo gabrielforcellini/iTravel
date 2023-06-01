@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import androidx.annotation.NonNull;
+
 import com.unesc.itravel.database.DBOpenHelper;
 import com.unesc.itravel.database.model.Login;
 
@@ -23,7 +25,8 @@ public class LoginDAO extends AbstrataDAO {
         db_helper = new DBOpenHelper(context);
     }
 
-    public long insert(Login loginModel){
+    public long insert(@NonNull Login loginModel, Context context){
+        db_helper = new DBOpenHelper(context);
         long rowAffect = 0;
         try {
             Open();

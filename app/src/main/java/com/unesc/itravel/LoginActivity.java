@@ -35,18 +35,19 @@ public class LoginActivity extends AppCompatActivity {
         edit = preferences.edit();
 
         login = findViewById(R.id.edt_nome);
-        String loginText = login.toString();
         senha = findViewById(R.id.edt_senha);
-        String senhaText = senha.toString();
         salvar = findViewById(R.id.btn_login);
         link_criar_conta = findViewById(R.id.link_criar_conta);
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if (!validaLogin(loginText, senhaText)) {
-                //    Snackbar.make(findViewById(android.R.id.content), "Usuário ou senha incorretos.", Snackbar.LENGTH_SHORT).show();
-                //    return;
-                //}
+                String loginText = login.getText().toString();
+                String senhaText = senha.getText().toString();
+
+                if (!validaLogin(loginText, senhaText)) {
+                    Snackbar.make(findViewById(android.R.id.content), "Usuário ou senha incorretos.", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
                 Toast.makeText(LoginActivity.this, "Login feito com sucesso.", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, Dados1Activity.class));
             }
@@ -61,10 +62,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validaLogin(String usuario, String senha) {
+        LoginDAO loginDao = new LoginDAO(LoginActivity.this);
         Login login = loginDao.findOne(usuario);
         if(login == null) {
             return false;
         }
+//        if (usuario.equals("")) {
+//            return false;
+//        }
+//        if (senha.equals("")) {
+//            return false;
+//        }
         if (login.getLogin().equals(usuario) && login.getSenha().equals(senha)) {
             return true;
         }
