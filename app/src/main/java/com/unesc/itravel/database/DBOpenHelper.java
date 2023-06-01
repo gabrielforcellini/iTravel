@@ -1,9 +1,12 @@
 package com.unesc.itravel.database;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.unesc.itravel.database.model.Gasolina;
 import com.unesc.itravel.database.model.Login;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
@@ -18,7 +21,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(Login.CREATE_TABLE);
+        try {
+            sqLiteDatabase.execSQL(Login.CREATE_TABLE);
+            sqLiteDatabase.execSQL(Gasolina.CREATE_TABLE);
+            System.out.println("Tabela gasolina criada com sucesso");
+        }catch(SQLException e) {
+            System.out.println("Erro ao criar tabela gasolina: " + e.getMessage());
+        }
     }
 
     @Override
