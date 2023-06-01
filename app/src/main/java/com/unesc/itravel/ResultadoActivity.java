@@ -54,7 +54,7 @@ public class ResultadoActivity extends AppCompatActivity {
 
     private void calcularValorTotalAndInserirInformacoes() {
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(EntretenimentoActivity.this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ResultadoActivity.this);
 
         String id_dados = sharedPreferences.getString("id_dados", "");
 
