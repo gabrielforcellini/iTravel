@@ -55,7 +55,7 @@
 
         <Button
             android:id="@+id/btn_previous"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="VOLTAR"
             android:layout_marginRight="25dp"
@@ -65,7 +65,7 @@
             android:layout_weight="50"
             />
 
-        <Button
+        <!--<Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             android:backgroundTint="@color/light_gray_dark"
             android:layout_gravity="center_horizontal"
             android:layout_weight="50"
-            />
+            />-->
     </LinearLayout>
 
 

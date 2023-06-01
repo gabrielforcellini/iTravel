@@ -12,16 +12,25 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/lbl_cafe_manha"
+        android:id="@+id/lbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Café da manhã"
+        android:text="Refeição"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/lbl_custo_refeicao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Custo estimado por refeição"
         android:textSize="20sp"
         android:layout_marginBottom="16dp"
         android:textColor="@color/white"/>
 
     <EditText
-        android:id="@+id/edt_cafe_manha"
+        android:id="@+id/edt_custo_refeicao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray_dark"
@@ -31,16 +40,16 @@
         android:layout_marginBottom="16dp"/>
 
     <TextView
-        android:id="@+id/lbl_almoco"
+        android:id="@+id/lbl_refeicao_dia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Almoço"
+        android:text="Número de refeições por dia"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/edt_almoco"
+        android:id="@+id/edt_refeicao_dia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray_dark"
@@ -50,16 +59,16 @@
         android:layout_marginBottom="16dp"/>
 
     <TextView
-        android:id="@+id/lbl_cafe_tarde"
+        android:id="@+id/lbl_total_refeicao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Café da tarde"
+        android:text="Total"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/edt_cafe_tarde"
+        android:id="@+id/edt_total_refeicao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray_dark"
@@ -68,7 +77,7 @@
         android:digits="0123456789,"
         android:layout_marginBottom="16dp"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/lbl_janta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,7 +113,7 @@
         android:textSize="24sp"
         android:inputType="numberDecimal"
         android:digits="0123456789,"
-        android:layout_marginBottom="46dp"/>
+        android:layout_marginBottom="46dp"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"

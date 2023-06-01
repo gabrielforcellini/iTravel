@@ -12,6 +12,15 @@
         android:layout_weight="1" />
 
     <TextView
+        android:id="@+id/lbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tarifa Aérea"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
         android:id="@+id/lbl_passagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,6 +31,25 @@
 
     <EditText
         android:id="@+id/edt_passagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray_dark"
+        android:textSize="24sp"
+        android:inputType="numberDecimal"
+        android:digits="0123456789,"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/lbl_alugel_carro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aluguel de veículo"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/edt_alugel_carro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray_dark"
