@@ -42,22 +42,32 @@ public class TarifaAereaDAO extends AbstrataDAO{
         return rowAffect;
     }
 
-    /*public TarifaAerea findOne(String tarifaAerea) {
+    public TarifaAerea findOneByIdDados(String id_dados) {
         Cursor cursor = null;
         TarifaAerea aerea = null;
         try {
             Open();
 
+            // Mudar para COLUNA_ID_DADOS
             String selection = TarifaAerea.COLUNA_ID + "=?";
-            String[] selectionArgs = {tarifaAerea};
+            String[] selectionArgs = {id_dados};
 
             cursor = db.query(TarifaAerea.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_ID));
+                float passagem = cursor.getFloat(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_PASSAGEM));
+                float aluguel_carro = cursor.getFloat(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_ALUGUEL_CARRO));
+                float total = cursor.getFloat(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_TOTAL));
 
+                aerea = new TarifaAerea();
+
+                aerea.setId(id);
+                aerea.setPassagem(passagem);
+                aerea.setAluguel_carro(aluguel_carro);
+                aerea.setTotal(total);
             }
-        }
-        finally {
+        } finally {
             if (cursor != null) {
                 cursor.close();
             }
@@ -68,5 +78,5 @@ public class TarifaAereaDAO extends AbstrataDAO{
         }
 
         return aerea;
-    }*/
+    }
 }

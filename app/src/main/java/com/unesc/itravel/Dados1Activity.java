@@ -52,8 +52,8 @@ public class Dados1Activity extends AppCompatActivity {
                     try {
                         DadosUserDAO dadosUserDAO = new DadosUserDAO(Dados1Activity.this);
 
-                        float viajantes = Float.parseFloat(edt_viajantes.getText().toString());
-                        float qtd_dias = Float.parseFloat(edt_qtd_dias.getText().toString());
+                        int viajantes = Integer.parseInt(edt_viajantes.getText().toString());
+                        int qtd_dias = Integer.parseInt(edt_qtd_dias.getText().toString());
 
                         DadosUser dadosUser = new DadosUser(viajantes, qtd_dias);
                         long idDados = dadosUserDAO.insert(dadosUser);

@@ -14,12 +14,18 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.DAO.EntretenimentoDAO;
 import com.unesc.itravel.database.DAO.HospedagemDAO;
+import com.unesc.itravel.database.DAO.RefeicaoDAO;
 import com.unesc.itravel.database.DAO.ResultadoDAO;
+import com.unesc.itravel.database.DAO.TarifaAereaDAO;
+import com.unesc.itravel.database.model.DadosUser;
 import com.unesc.itravel.database.model.Entretenimento;
 import com.unesc.itravel.database.model.Hospedagem;
+import com.unesc.itravel.database.model.Refeicao;
 import com.unesc.itravel.database.model.Resultado;
+import com.unesc.itravel.database.model.TarifaAerea;
 
 public class ResultadoActivity extends AppCompatActivity {
     private Button btn_next;
@@ -62,13 +68,29 @@ public class ResultadoActivity extends AppCompatActivity {
 
         Hospedagem hospedagem = hospedagemDAO.findOneByIdDados(id_dados);
 
+        TarifaAereaDAO tarifaAereaDAO = new TarifaAereaDAO(ResultadoActivity.this);
+
+        TarifaAerea tarifaAerea = tarifaAereaDAO.findOneByIdDados(id_dados);
+
+        RefeicaoDAO refeicaoDAO = new RefeicaoDAO(ResultadoActivity.this);
+
+        Refeicao refeicao = refeicaoDAO.findOneByIdDados(id_dados);
+
+        EntretenimentoDAO entretenimentoDAO = new EntretenimentoDAO(ResultadoActivity.this);
+
+        Entretenimento entretenimento = entretenimentoDAO.findOneByIdDados(id_dados);
+
+        DadosUserDAO dadosUserDAO = new DadosUserDAO(ResultadoActivity.this);
+
+        DadosUser dadosUser = dadosUserDAO.findOne(id_dados);
+
         double totalHospedagem = hospedagem.getTotal();
-        double totalTarifaAerea = 4000;
-        double totalRefeicoes = 3000;
-        double totalEntretenimento = 500;
+        double totalTarifaAerea = tarifaAerea.getTotal();
+        double totalRefeicoes = refeicao.getTotal();
+        double totalEntretenimento = entretenimento.getTotal();
 
         double total = totalHospedagem + totalTarifaAerea + totalRefeicoes + totalEntretenimento;
-        double total_pessoas = total /3;
+        double total_pessoas = total / dadosUser.getViajantes();
 
         edt_total.setText(String.valueOf(total));
         edt_total_pessoa.setText(String.valueOf(total_pessoas));
