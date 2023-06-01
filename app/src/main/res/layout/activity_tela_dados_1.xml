@@ -1,126 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/geral_background"
-    android:padding="16dp">
-
-    <View
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/geral_background">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Informe os dados da viagem"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"/>
-
-
-    <TextView
-        android:id="@+id/lbl_viajantes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Viajantes"
-        android:textSize="20sp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/white"/>
-
-    <EditText
-        android:id="@+id/edt_viajantes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray_dark"
-        android:textSize="24sp"
-        android:inputType="number"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/lbl_qtd_dias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dias"
-        android:textSize="20sp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/white"/>
-
-    <EditText
-        android:id="@+id/edt_qtd_dias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray_dark"
-        android:textSize="24sp"
-        android:inputType="number"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/lbl_meio_locomocao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Qual o meio de locomoção?"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"/>
-
-    <RadioGroup
-        android:id="@+id/rgp_locomocao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="54dp">
+        android:padding="16dp">
 
-        <RadioButton
-            android:id="@+id/radio_btn_aviao"
-            android:layout_width="wrap_content"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/lbl"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Avião"
+            android:text="Informe os dados da viagem"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"/>
+
+
+        <TextView
+            android:id="@+id/lbl_viajantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Viajantes"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/white"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_carro"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edt_viajantes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Carro"
+            android:background="@color/light_gray_dark"
+            android:textSize="24sp"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/lbl_qtd_dias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dias"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/white"/>
 
-        <RadioButton
-            android:id="@+id/radio_btn_onibus"
+        <EditText
+            android:id="@+id/edt_qtd_dias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray_dark"
+            android:textSize="24sp"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/lbl_meio_locomocao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Qual o meio de locomoção?"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"/>
+
+        <RadioGroup
+            android:id="@+id/rgp_locomocao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="54dp">
+
+            <RadioButton
+                android:id="@+id/radio_btn_aviao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avião"
+                android:textColor="@color/white"/>
+
+            <RadioButton
+                android:id="@+id/radio_btn_carro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carro"
+                android:textColor="@color/white"/>
+
+            <RadioButton
+                android:id="@+id/radio_btn_onibus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ônibus"
+                android:textColor="@color/white"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="PRÓXIMO"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/light_gray_dark"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ônibus"
-            android:textColor="@color/white"/>
-
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="PRÓXIMO"
-        android:textColor="@android:color/black"
-        android:backgroundTint="@color/light_gray_dark"
-        android:layout_gravity="center_horizontal"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="iTravel"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center_horizontal"/>
+            android:text="iTravel"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"/>
 
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

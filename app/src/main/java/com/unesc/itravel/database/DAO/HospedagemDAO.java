@@ -80,6 +80,40 @@ public class HospedagemDAO extends AbstrataDAO{
         return hosp;
     }
 
+    public Hospedagem findOneByIdDados(String id_dados) {
+        Cursor cursor = null;
+        Hospedagem hosp = null;
+
+        try {
+            Open();
+
+            // Mudar para COLUNA_ID_DADOS
+            String selection = Hospedagem.COLUNA_ID;
+            String[] selectionArgs = { id_dados };
+
+            cursor = db.query(Hospedagem.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_ID));
+                Float valor_diaria = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_VALOR_DIARIA));
+                Float total_noites = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL_NOITES));
+                Float total_quartos = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL_QUARTOS));
+                Float total = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL));
+
+                hosp = new Hospedagem();
+
+                hosp.setId(id);
+                hosp.setValor_diaria(valor_diaria);
+                hosp.setTotal_noites(total_noites);
+                hosp.setTotal_quartos(total_quartos);
+                hosp.setTotal(total);
+            }
+        } finally {
+            cursor.close();
+            Close();
+        }
+        return hosp;
+    }
+
     public List<Hospedagem> selectAll() {
         List<Hospedagem> hospedagems = new ArrayList<>();
         try {
