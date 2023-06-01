@@ -42,10 +42,10 @@ public class LoginActivity extends AppCompatActivity {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!validaLogin(loginText, senhaText)) {
-                    Snackbar.make(findViewById(android.R.id.content), "Usuário ou senha incorretos.", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
+                //if (!validaLogin(loginText, senhaText)) {
+                //    Snackbar.make(findViewById(android.R.id.content), "Usuário ou senha incorretos.", Snackbar.LENGTH_SHORT).show();
+                //    return;
+                //}
                 startActivity(new Intent(LoginActivity.this, Dados1Activity.class));
             }
         });

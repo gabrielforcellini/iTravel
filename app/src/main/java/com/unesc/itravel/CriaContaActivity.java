@@ -2,6 +2,7 @@ package com.unesc.itravel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,8 @@ public class CriaContaActivity extends AppCompatActivity {
         edt_senha = findViewById(R.id.edt_senha);
         edt_confirma_senha = findViewById(R.id.edt_confirma_senha);
         btn_salvar = findViewById(R.id.btn_salvar);
+
+        edt_senha.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         btn_salvar.setOnClickListener(new View.OnClickListener() {
             @Override
