@@ -60,7 +60,8 @@
         android:layout_height="wrap_content"
         android:background="@color/light_gray_dark"
         android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"/>
 
     <TextView
         android:id="@+id/lbl_confirma_senha"
@@ -77,7 +78,8 @@
         android:layout_height="wrap_content"
         android:background="@color/light_gray_dark"
         android:textSize="24sp"
-        android:layout_marginBottom="46dp"/>
+        android:layout_marginBottom="46dp"
+        android:inputType="textPassword"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -86,10 +88,23 @@
         android:weightSum="100">
 
         <Button
+            android:id="@+id/btn_voltar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VOLTAR"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/light_gray_dark"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="50"
+            />
+
+        <Button
             android:id="@+id/btn_salvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="25dp"
             android:layout_weight="50"
             android:backgroundTint="@color/green"
             android:text="SALVAR"
