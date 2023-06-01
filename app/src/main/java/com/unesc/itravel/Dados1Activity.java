@@ -73,7 +73,6 @@ public class Dados1Activity extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(Dados1Activity.this, "Há campos que precisam ser preenchidos.", Toast.LENGTH_SHORT).show();
-//                    Snackbar.make(findViewById(android.R.id.content), "Há campos que precisam ser preenchidos.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
             }
