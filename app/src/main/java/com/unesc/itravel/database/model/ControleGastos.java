@@ -12,6 +12,7 @@ public class ControleGastos {
             COLUNA_BOX_ENTRETENIMENTO = "_box_entretenimento";
 
     private long id;
+    private long id_dados;
     private boolean box_gasolina;
     private boolean box_tarifa;
     private boolean box_refeicao;
@@ -21,6 +22,7 @@ public class ControleGastos {
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
             + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_ID_DADOS + " integer not null, "
             + COLUNA_BOX_GASOLINA + " boolean not null, "
             + COLUNA_BOX_TARIFA + " boolean not null, "
             + COLUNA_BOX_REFEICAO + " boolean not null, "
@@ -33,7 +35,8 @@ public class ControleGastos {
     public ControleGastos() {
     }
 
-    public ControleGastos(boolean box_gasolina, boolean box_tarifa, boolean box_refeicao, boolean box_hospedagem, boolean box_entretenimento) {
+    public ControleGastos(long id_dados, boolean box_gasolina, boolean box_tarifa, boolean box_refeicao, boolean box_hospedagem, boolean box_entretenimento) {
+        this.id_dados = id_dados;
         this.box_gasolina = box_gasolina;
         this.box_tarifa = box_tarifa;
         this.box_refeicao = box_refeicao;
@@ -47,6 +50,14 @@ public class ControleGastos {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId_dados() {
+        return id_dados;
+    }
+
+    public void setId_dados(long id_dados) {
+        this.id_dados = id_dados;
     }
 
     public boolean isBox_gasolina() {

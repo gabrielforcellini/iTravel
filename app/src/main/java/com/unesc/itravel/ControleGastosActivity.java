@@ -1,7 +1,9 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,10 +29,16 @@ public class ControleGastosActivity extends AppCompatActivity {
     private CheckBox check_box_refeicao;
     private CheckBox check_box_hospedagem;
     private CheckBox check_box_entretenimento;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor edit;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controle_gastos);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(ControleGastosActivity.this);
+        edit = preferences.edit();
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
@@ -58,12 +66,18 @@ public class ControleGastosActivity extends AppCompatActivity {
                     ControleGastosDAO controleGastosDAO = new ControleGastosDAO(ControleGastosActivity.this);
 
                     boolean box_gasolina = Boolean.parseBoolean(check_box_gasolina.getText().toString());
-                    boolean box_tarifa = Boolean.parseBoolean(check_box_tarifa.getText().toString());;
-                    boolean box_refeicao = Boolean.parseBoolean(check_box_refeicao.getText().toString());;
-                    boolean box_hospedagem = Boolean.parseBoolean(check_box_hospedagem.getText().toString());;
-                    boolean box_entretenimento = Boolean.parseBoolean(check_box_entretenimento.getText().toString());;
+                    boolean box_tarifa = Boolean.parseBoolean(check_box_tarifa.getText().toString());
+                    boolean box_refeicao = Boolean.parseBoolean(check_box_refeicao.getText().toString());
+                    boolean box_hospedagem = Boolean.parseBoolean(check_box_hospedagem.getText().toString());
+                    boolean box_entretenimento = Boolean.parseBoolean(check_box_entretenimento.getText().toString());
 
-                    ControleGastos controleGastos = new ControleGastos(box_gasolina, box_tarifa, box_refeicao, box_hospedagem, box_entretenimento);
+                    long id_dados = preferences.getLong("id_dados", 99);
+                    if (id_dados == 99){
+                        Toast.makeText(ControleGastosActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    ControleGastos controleGastos = new ControleGastos(id_dados, box_gasolina, box_tarifa, box_refeicao, box_hospedagem, box_entretenimento);
                     controleGastosDAO.insert(controleGastos);
                     Toast.makeText(ControleGastosActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ControleGastosActivity.this, ResultadoActivity.class));
