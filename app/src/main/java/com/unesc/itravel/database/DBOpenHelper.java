@@ -6,8 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.unesc.itravel.database.model.ControleGastos;
+import com.unesc.itravel.database.model.DadosUser;
+import com.unesc.itravel.database.model.Entretenimento;
 import com.unesc.itravel.database.model.Gasolina;
+import com.unesc.itravel.database.model.Hospedagem;
 import com.unesc.itravel.database.model.Login;
+import com.unesc.itravel.database.model.Refeicao;
+import com.unesc.itravel.database.model.Resultado;
+import com.unesc.itravel.database.model.TarifaAerea;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
@@ -24,7 +31,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         try {
             sqLiteDatabase.execSQL(Login.CREATE_TABLE);
             sqLiteDatabase.execSQL(Gasolina.CREATE_TABLE);
-            System.out.println("Tabela gasolina criada com sucesso");
+            sqLiteDatabase.execSQL(Hospedagem.CREATE_TABLE);
+            sqLiteDatabase.execSQL(Refeicao.CREATE_TABLE);
+            sqLiteDatabase.execSQL(Entretenimento.CREATE_TABLE);
+            sqLiteDatabase.execSQL(TarifaAerea.CREATE_TABLE);
+            sqLiteDatabase.execSQL(DadosUser.CREATE_TABLE);
+            sqLiteDatabase.execSQL(ControleGastos.CREATE_TABLE);
+            sqLiteDatabase.execSQL(Resultado.CREATE_TABLE);
         }catch(SQLException e) {
             System.out.println("Erro ao criar tabela gasolina: " + e.getMessage());
         }

@@ -3,12 +3,21 @@ package com.unesc.itravel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.unesc.itravel.database.DAO.RefeicaoDAO;
+import com.unesc.itravel.database.DAO.TarifaAereaDAO;
+import com.unesc.itravel.database.model.Refeicao;
+import com.unesc.itravel.database.model.TarifaAerea;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,11 +25,9 @@ import java.util.List;
 public class RefeicoesActivity extends AppCompatActivity {
     private Button btn_next;
     private Button btn_previous;
-    private EditText edt_cafe_manha;
-    private EditText edt_almoco;
-    private EditText edt_cafe_tarde;
-    private EditText edt_janta;
-    private EditText edt_outros;
+    private EditText edt_custo_refeicao;
+    private EditText edt_refeicao_dia;
+    private EditText edt_total_refeicao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,18 +35,13 @@ public class RefeicoesActivity extends AppCompatActivity {
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
-        edt_cafe_manha = findViewById(R.id.edt_cafe_manha);
-        edt_almoco = findViewById(R.id.edt_almoco);
-        edt_cafe_tarde = findViewById(R.id.edt_cafe_tarde);
-        edt_janta = findViewById(R.id.edt_janta);
-        edt_outros = findViewById(R.id.edt_outros);
+        edt_custo_refeicao = findViewById(R.id.edt_custo_refeicao);
+        edt_refeicao_dia = findViewById(R.id.edt_refeicao_dia);
+        edt_total_refeicao = findViewById(R.id.edt_total_refeicao);
 
         List<EditText> campos = Arrays.asList(
-                edt_cafe_manha,
-                edt_almoco,
-                edt_cafe_tarde,
-                edt_janta,
-                edt_outros
+                edt_custo_refeicao,
+                edt_refeicao_dia
         );
 
         btn_next.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +49,20 @@ public class RefeicoesActivity extends AppCompatActivity {
                 if (!Utils.validarCamposVazios(campos)) {
                     return;
                 }
-                startActivity(new Intent(RefeicoesActivity.this, HospedagemActivity.class));
+                try {
+                    RefeicaoDAO refeicaoDAO = new RefeicaoDAO(RefeicoesActivity.this);
+
+                    float custo = Float.parseFloat(edt_custo_refeicao.getText().toString());
+                    float refeicao_dia = Float.parseFloat(edt_refeicao_dia.getText().toString());
+                    float total = Float.parseFloat(edt_total_refeicao.getText().toString());
+
+                    Refeicao refeicao = new Refeicao(custo, refeicao_dia, total);
+                    refeicaoDAO.insert(refeicao);
+                    Toast.makeText(RefeicoesActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RefeicoesActivity.this, HospedagemActivity.class));
+                } catch (Exception e) {
+                    Toast.makeText(RefeicoesActivity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btn_previous.setOnClickListener(new View.OnClickListener() {
@@ -56,5 +71,38 @@ public class RefeicoesActivity extends AppCompatActivity {
                 startActivity(new Intent(RefeicoesActivity.this, TarifaAereaActivity.class));
             }
         });
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Sem utilidade, porém necessário
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                calcularValorTotal();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Sem utilidade, porém necessário
+            }
+        };
+
+        edt_custo_refeicao.addTextChangedListener(textWatcher);
+        edt_refeicao_dia.addTextChangedListener(textWatcher);
+    }
+
+    private void calcularValorTotal() {
+        if (TextUtils.isEmpty(edt_custo_refeicao.getText().toString()) || TextUtils.isEmpty(edt_refeicao_dia.getText().toString())) {
+            return;
+        }
+
+        double custoRefeicao = Double.parseDouble(edt_custo_refeicao.getText().toString());
+        double qtdRefeicaoDia = Double.parseDouble(edt_refeicao_dia.getText().toString());
+
+        double resultado = ((qtdRefeicaoDia * 3) * custoRefeicao) * 5;
+
+        edt_total_refeicao.setText(String.valueOf(resultado));
     }
 }

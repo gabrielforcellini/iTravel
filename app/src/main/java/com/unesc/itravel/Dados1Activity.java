@@ -8,10 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.unesc.itravel.database.DAO.DadosUserDAO;
+import com.unesc.itravel.database.DAO.HospedagemDAO;
+import com.unesc.itravel.database.model.DadosUser;
+import com.unesc.itravel.database.model.Hospedagem;
 
 public class Dados1Activity extends AppCompatActivity {
 
@@ -19,9 +24,9 @@ public class Dados1Activity extends AppCompatActivity {
 
     private RadioGroup radioGroup;
 
-    private EditText edt_viajantes;
+    public EditText edt_viajantes;
 
-    private EditText edt_qtd_dias;
+    public EditText edt_qtd_dias;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +46,32 @@ public class Dados1Activity extends AppCompatActivity {
 
                 // Pelo menos um RadioButton está selecionado
                 if ((radioButtonId != -1) && (!TextUtils.isEmpty(edt_viajantes.getText().toString()))
-                    && (!TextUtils.isEmpty(edt_qtd_dias.getText().toString()))) {
-                    RadioButton radioButtonSelecionado = findViewById(radioButtonId);
+                        && (!TextUtils.isEmpty(edt_qtd_dias.getText().toString()))) {
 
-                    if (radioButtonSelecionado.getId() == R.id.radio_btn_carro) {
-                        startActivity(new Intent(Dados1Activity.this, GasolinaActivity.class));
-                    } else {
-                        startActivity(new Intent(Dados1Activity.this, TarifaAereaActivity.class));
+                    try {
+                        DadosUserDAO dadosUserDAO = new DadosUserDAO(Dados1Activity.this);
+
+                        float viajantes = Float.parseFloat(edt_viajantes.getText().toString());
+                        float qtd_dias = Float.parseFloat(edt_qtd_dias.getText().toString());
+
+                        DadosUser dadosUser = new DadosUser(viajantes, qtd_dias);
+                        dadosUserDAO.insert(dadosUser);
+                        Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+
+                        RadioButton radioButtonSelecionado = findViewById(radioButtonId);
+
+                        if (radioButtonSelecionado.getId() == R.id.radio_btn_carro) {
+                            startActivity(new Intent(Dados1Activity.this, GasolinaActivity.class));
+                        } else {
+                            startActivity(new Intent(Dados1Activity.this, TarifaAereaActivity.class));
+                        }
+
+                    } catch (Exception e) {
+                        Toast.makeText(Dados1Activity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Snackbar.make(findViewById(android.R.id.content), "Há campos que precisam ser preenchidos.", Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(Dados1Activity.this, "Há campos que precisam ser preenchidos.", Toast.LENGTH_SHORT).show();
+//                    Snackbar.make(findViewById(android.R.id.content), "Há campos que precisam ser preenchidos.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
             }

@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.unesc.itravel.database.DAO.ControleGastosDAO;
+import com.unesc.itravel.database.DAO.EntretenimentoDAO;
+import com.unesc.itravel.database.model.ControleGastos;
+import com.unesc.itravel.database.model.Entretenimento;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +54,23 @@ public class ControleGastosActivity extends AppCompatActivity {
                     Snackbar.make(findViewById(android.R.id.content), "Há campos que precisam ser preenchidos.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                startActivity(new Intent(ControleGastosActivity.this, ResultadoActivity.class));
+                try {
+                    ControleGastosDAO controleGastosDAO = new ControleGastosDAO(ControleGastosActivity.this);
+
+                    boolean box_gasolina = Boolean.parseBoolean(check_box_gasolina.getText().toString());
+                    boolean box_tarifa = Boolean.parseBoolean(check_box_tarifa.getText().toString());;
+                    boolean box_refeicao = Boolean.parseBoolean(check_box_refeicao.getText().toString());;
+                    boolean box_hospedagem = Boolean.parseBoolean(check_box_hospedagem.getText().toString());;
+                    boolean box_entretenimento = Boolean.parseBoolean(check_box_entretenimento.getText().toString());;
+
+                    ControleGastos controleGastos = new ControleGastos(box_gasolina, box_tarifa, box_refeicao, box_hospedagem, box_entretenimento);
+                    controleGastosDAO.insert(controleGastos);
+                    Toast.makeText(ControleGastosActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ControleGastosActivity.this, ResultadoActivity.class));
+                } catch (Exception e) {
+                    Toast.makeText(ControleGastosActivity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         btn_previous.setOnClickListener(new View.OnClickListener() {

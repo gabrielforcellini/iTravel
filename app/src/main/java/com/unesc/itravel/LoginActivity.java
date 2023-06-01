@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 //    Snackbar.make(findViewById(android.R.id.content), "Usuário ou senha incorretos.", Snackbar.LENGTH_SHORT).show();
                 //    return;
                 //}
+                Toast.makeText(LoginActivity.this, "Login feito com sucesso.", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, Dados1Activity.class));
             }
         });
