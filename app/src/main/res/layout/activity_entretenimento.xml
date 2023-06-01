@@ -1,105 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/geral_background">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Entretenimento"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/lbl_entretenimento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Valor entretenimentos p/ dia"
-        android:textSize="20sp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/white"/>
-
-    <EditText
-        android:id="@+id/edt_entretenimento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray_dark"
-        android:textSize="24sp"
-        android:inputType="numberDecimal"
-        android:digits="0123456789,"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/lbl_total"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Total"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"/>
-
-    <EditText
-        android:id="@+id/edt_total"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray_dark"
-        android:textSize="24sp"
-        android:editable="false"
-        android:layout_marginBottom="46dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="100">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/btn_voltar"
+        <TextView
+            android:id="@+id/lbl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="VOLTAR"
-            android:layout_marginRight="25dp"
-            android:textColor="@android:color/black"
-            android:backgroundTint="@color/light_gray_dark"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="50"
-            />
+            android:text="Entretenimento"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"/>
 
-        <Button
-            android:id="@+id/btn_next"
+        <TextView
+            android:id="@+id/lbl_entretenimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="PRÓXIMO"
-            android:textColor="@android:color/black"
-            android:backgroundTint="@color/light_gray_dark"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="50"
-            />
+            android:text="Valor entretenimentos p/ dia"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/edt_entretenimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray_dark"
+            android:textSize="24sp"
+            android:inputType="numberDecimal"
+            android:digits="0123456789,"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/lbl_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/edt_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray_dark"
+            android:textSize="24sp"
+            android:editable="false"
+            android:layout_marginBottom="46dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <Button
+                android:id="@+id/btn_voltar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VOLTAR"
+                android:layout_marginRight="25dp"
+                android:textColor="@android:color/black"
+                android:backgroundTint="@color/light_gray_dark"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="50"
+                />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="PRÓXIMO"
+                android:textColor="@android:color/black"
+                android:backgroundTint="@color/light_gray_dark"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="50"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="iTravel"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"/>
+
+
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="iTravel"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center_horizontal"/>
-
-
-</LinearLayout>
+</ScrollView>
