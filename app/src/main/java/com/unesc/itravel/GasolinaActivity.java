@@ -76,7 +76,7 @@ public class GasolinaActivity extends AppCompatActivity {
                     Gasolina gasolina = new Gasolina(total_km, media_litro, custo_litro, total_veic, total);
                     gasolinaDAO.insert(gasolina);
                     Snackbar.make(findViewById(android.R.id.content), "salvo.", Snackbar.LENGTH_SHORT).show();
-                    startActivity(new Intent(GasolinaActivity.this, TarifaAereaActivity.class));
+                    startActivity(new Intent(GasolinaActivity.this, RefeicoesActivity.class));
                 } catch (Exception e) {
                     Snackbar.make(findViewById(android.R.id.content), "Erro: "+e.toString(), Snackbar.LENGTH_SHORT).show();
                     return;
