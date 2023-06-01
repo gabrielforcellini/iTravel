@@ -2,6 +2,7 @@ package com.unesc.itravel.database.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import com.unesc.itravel.database.DBOpenHelper;
 import com.unesc.itravel.database.model.DadosUser;
@@ -36,34 +37,27 @@ public class DadosUserDAO extends AbstrataDAO{
         return rowAffect;
     }
 
-    /*public TarifaAerea findOne(String tarifaAerea) {
+    public DadosUser findOne(String id) {
         Cursor cursor = null;
-        TarifaAerea aerea = null;
+        DadosUser dadosUser = null;
         try {
             Open();
 
-            String selection = TarifaAerea.COLUNA_ID + "=?";
-            String[] selectionArgs = {tarifaAerea};
+            String selection = DadosUser.COLUNA_ID + "=?";
+            String[] selectionArgs = {id};
 
-            cursor = db.query(TarifaAerea.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
+            cursor = db.query(DadosUser.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_ID));
-                Float total_km = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_TOTAL_KM));
-                Float media_litro = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_MEDIA_LITRO));
-                Float custo_litro = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_CUSTO_LITRO));
-                Float total_veic = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_TOTAL_VEIC));
-                Float total = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_TOTAL));
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_ID));
+                Float viajantes = cursor.getFloat(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_VIAJANTES));
+                Float qtdDias = cursor.getFloat(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_QTD_DIAS));
 
-                aerea = new Gasolina();
+                dadosUser = new DadosUser();
 
-                aerea.setId(id);
-                aerea.setTotal_km(total_km);
-                aerea.setMedia_litro(media_litro);
-                aerea.setCusto_litro(custo_litro);
-                aerea.setTotal_veic(total_veic);
-                aerea.setTotal(total);
-
+                dadosUser.setId(id);
+                dadosUser.setQtd_dias(qtdDias);
+                dadosUser.setViajantes(viajantes);
             }
         }
         finally {
@@ -76,6 +70,6 @@ public class DadosUserDAO extends AbstrataDAO{
             }
         }
 
-        return aerea;
-    }*/
+        return dadosUser;
+    }
 }

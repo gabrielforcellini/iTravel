@@ -1,7 +1,9 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,8 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.unesc.itravel.database.DAO.EntretenimentoDAO;
+import com.unesc.itravel.database.DAO.HospedagemDAO;
 import com.unesc.itravel.database.DAO.ResultadoDAO;
 import com.unesc.itravel.database.model.Entretenimento;
+import com.unesc.itravel.database.model.Hospedagem;
 import com.unesc.itravel.database.model.Resultado;
 
 public class ResultadoActivity extends AppCompatActivity {
@@ -50,7 +54,15 @@ public class ResultadoActivity extends AppCompatActivity {
 
     private void calcularValorTotalAndInserirInformacoes() {
 
-        double totalHospedagem = 600;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(EntretenimentoActivity.this);
+
+        String id_dados = sharedPreferences.getString("id_dados", "");
+
+        HospedagemDAO hospedagemDAO = new HospedagemDAO(ResultadoActivity.this);
+
+        Hospedagem hospedagem = hospedagemDAO.findOneByIdDados(id_dados);
+
+        double totalHospedagem = hospedagem.getTotal();
         double totalTarifaAerea = 4000;
         double totalRefeicoes = 3000;
         double totalEntretenimento = 500;

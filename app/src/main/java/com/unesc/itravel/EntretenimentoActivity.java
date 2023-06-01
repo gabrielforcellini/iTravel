@@ -1,8 +1,11 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,8 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.DAO.EntretenimentoDAO;
 import com.unesc.itravel.database.DAO.HospedagemDAO;
+import com.unesc.itravel.database.model.DadosUser;
 import com.unesc.itravel.database.model.Entretenimento;
 import com.unesc.itravel.database.model.Hospedagem;
 
@@ -97,8 +102,19 @@ public class EntretenimentoActivity extends AppCompatActivity {
 
         double valorEntretenimento = Double.parseDouble(edt_entretenimento.getText().toString());
 
-        double resultado = valorEntretenimento * 5;
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(EntretenimentoActivity.this);
 
-        edt_total.setText(String.valueOf(resultado));
+            String id_dados = sharedPreferences.getString("id_dados", "");
+
+            DadosUserDAO dadosUserDAO = new DadosUserDAO(EntretenimentoActivity.this);
+
+            DadosUser dadosUser = dadosUserDAO.findOne(id_dados);
+
+            double resultado = valorEntretenimento * dadosUser.getQtd_dias();
+            edt_total.setText(String.valueOf(resultado));
+        } catch (SQLException e) {
+            Toast.makeText(EntretenimentoActivity.this, "Erro ao tentar obter dados do usuário.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
