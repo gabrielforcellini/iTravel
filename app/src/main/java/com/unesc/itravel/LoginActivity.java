@@ -67,12 +67,12 @@ public class LoginActivity extends AppCompatActivity {
         if(login == null) {
             return false;
         }
-//        if (usuario.equals("")) {
-//            return false;
-//        }
-//        if (senha.equals("")) {
-//            return false;
-//        }
+        if (usuario.equals("")) {
+            return false;
+        }
+        if (senha.equals("")) {
+            return false;
+        }
         if (login.getLogin().equals(usuario) && login.getSenha().equals(senha)) {
             return true;
         }

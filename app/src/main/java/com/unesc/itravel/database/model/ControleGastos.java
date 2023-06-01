@@ -4,6 +4,7 @@ public class ControleGastos {
     public static final String TABLE_NAME = "controle_gastos";
     public static final String
             COLUNA_ID = "_id",
+            COLUNA_ID_DADOS = "_idDados",
             COLUNA_BOX_GASOLINA = "_box_gasolina",
             COLUNA_BOX_TARIFA = "_box_tarifa",
             COLUNA_BOX_REFEICAO = "_box_refeicao",
@@ -19,12 +20,12 @@ public class ControleGastos {
 
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
-            + COLUNA_ID + " integer primary key autoincrement,"
-            + COLUNA_BOX_GASOLINA + " boolean not null,"
-            + COLUNA_BOX_TARIFA + " boolean not null,"
-            + COLUNA_BOX_REFEICAO + " boolean not null,"
-            + COLUNA_BOX_HOSPEDAGEM + " boolean not null,"
-            + COLUNA_BOX_ENTRETENIMENTO + " boolean not null,"
+            + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_BOX_GASOLINA + " boolean not null, "
+            + COLUNA_BOX_TARIFA + " boolean not null, "
+            + COLUNA_BOX_REFEICAO + " boolean not null, "
+            + COLUNA_BOX_HOSPEDAGEM + " boolean not null, "
+            + COLUNA_BOX_ENTRETENIMENTO + " boolean not null "
             + ");";
 
     public static final String DROP_TABLE = "drop table if exists " + TABLE_NAME +";";

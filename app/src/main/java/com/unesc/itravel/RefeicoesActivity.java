@@ -75,7 +75,7 @@ public class RefeicoesActivity extends AppCompatActivity {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Sem utilidade, porém necessário
+                // vazio, porém necessário
             }
 
             @Override
@@ -85,7 +85,7 @@ public class RefeicoesActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Sem utilidade, porém necessário
+                // vazio, porém necessário
             }
         };
 

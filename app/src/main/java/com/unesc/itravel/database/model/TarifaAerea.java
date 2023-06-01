@@ -15,10 +15,10 @@ public class TarifaAerea {
 
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
-            + COLUNA_ID + " integer primary key autoincrement,"
-            + COLUNA_PASSAGEM + " REAL not null,"
-            + COLUNA_ALUGUEL_CARRO + " REAL not null,"
-            + COLUNA_TOTAL + " REAL not null,"
+            + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_PASSAGEM + " REAL not null, "
+            + COLUNA_ALUGUEL_CARRO + " REAL not null, "
+            + COLUNA_TOTAL + " REAL not null "
             + ");";
 
     public static final String DROP_TABLE = "drop table if exists " + TABLE_NAME +";";

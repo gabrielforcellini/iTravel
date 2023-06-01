@@ -13,9 +13,9 @@ public class DadosUser {
 
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
-            + COLUNA_ID + " integer primary key autoincrement,"
-            + COLUNA_VIAJANTES + " REAL not null,"
-            + COLUNA_QTD_DIAS + " REAL not null,"
+            + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_VIAJANTES + " REAL not null, "
+            + COLUNA_QTD_DIAS + " REAL not null "
             + ");";
 
     public static final String DROP_TABLE = "drop table if exists " + TABLE_NAME +";";

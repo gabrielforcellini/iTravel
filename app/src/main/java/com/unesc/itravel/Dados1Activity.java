@@ -1,6 +1,7 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -55,7 +56,8 @@ public class Dados1Activity extends AppCompatActivity {
                         float qtd_dias = Float.parseFloat(edt_qtd_dias.getText().toString());
 
                         DadosUser dadosUser = new DadosUser(viajantes, qtd_dias);
-                        dadosUserDAO.insert(dadosUser);
+                        long idDados = dadosUserDAO.insert(dadosUser);
+
                         Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
 
                         RadioButton radioButtonSelecionado = findViewById(radioButtonId);
