@@ -14,6 +14,7 @@ import java.util.List;
 public class TarifaAereaDAO extends AbstrataDAO{
     private static final String[] colunas = {
             TarifaAerea.COLUNA_ID,
+            TarifaAerea.COLUNA_ID_DADOS,
             TarifaAerea.COLUNA_PASSAGEM,
             TarifaAerea.COLUNA_ALUGUEL_CARRO,
             TarifaAerea.COLUNA_TOTAL
@@ -50,13 +51,14 @@ public class TarifaAereaDAO extends AbstrataDAO{
             Open();
 
             // Mudar para COLUNA_ID_DADOS
-            String selection = TarifaAerea.COLUNA_ID + "=?";
+            String selection = TarifaAerea.COLUNA_ID_DADOS + "=?";
             String[] selectionArgs = {id_dados};
 
             cursor = db.query(TarifaAerea.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_ID));
+                int idDados = cursor.getInt(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_ID_DADOS));
                 float passagem = cursor.getFloat(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_PASSAGEM));
                 float aluguel_carro = cursor.getFloat(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_ALUGUEL_CARRO));
                 float total = cursor.getFloat(cursor.getColumnIndexOrThrow(TarifaAerea.COLUNA_TOTAL));
@@ -64,6 +66,7 @@ public class TarifaAereaDAO extends AbstrataDAO{
                 aerea = new TarifaAerea();
 
                 aerea.setId(id);
+                aerea.setId_dados(idDados);
                 aerea.setPassagem(passagem);
                 aerea.setAluguel_carro(aluguel_carro);
                 aerea.setTotal(total);

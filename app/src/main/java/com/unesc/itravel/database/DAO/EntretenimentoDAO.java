@@ -14,6 +14,7 @@ import java.util.List;
 public class EntretenimentoDAO extends AbstrataDAO{
     private static final String[] colunas = {
             Entretenimento.COLUNA_ID,
+            Entretenimento.COLUNA_ID_DADOS,
             Entretenimento.COLUNA_VALOR_ENTRETENIMENTO,
             Entretenimento.COLUNA_TOTAL,
     };
@@ -48,18 +49,20 @@ public class EntretenimentoDAO extends AbstrataDAO{
             Open();
 
             // Mudar para COLUNA_ID_DADOS
-            String selection = Entretenimento.COLUNA_ID + "=?";
+            String selection = Entretenimento.COLUNA_ID_DADOS + "=?";
             String[] selectionArgs = { id_dados };
 
             cursor = db.query(Entretenimento.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_ID));
+                int idDados = cursor.getInt(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_ID_DADOS));
                 float valor_entretenimento = cursor.getFloat(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_VALOR_ENTRETENIMENTO));
                 float valor_total = cursor.getFloat(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_TOTAL));
                 entr = new Entretenimento();
 
                 entr.setId(id);
+                entr.setId_dados(idDados);
                 entr.setValor_entretenimento(valor_entretenimento);
                 entr.setTotal(valor_total);
             }

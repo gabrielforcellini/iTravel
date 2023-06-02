@@ -14,6 +14,7 @@ import java.util.List;
 public class ResultadoDAO extends AbstrataDAO{
     private static final String[] colunas = {
             Resultado.COLUNA_ID,
+            Resultado.COLUNA_ID_DADOS,
             Resultado.COLUNA_TOTAL,
             Resultado.COLUNA_TOTAL_PESSOA
     };

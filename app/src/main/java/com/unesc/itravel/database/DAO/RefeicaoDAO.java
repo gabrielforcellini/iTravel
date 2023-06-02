@@ -13,6 +13,7 @@ import java.util.List;
 public class RefeicaoDAO extends AbstrataDAO{
     private static final String[] colunas = {
             Refeicao.COLUNA_ID,
+            Refeicao.COLUNA_ID_DADOS,
             Refeicao.COLUNA_CUSTO_REFEICAO,
             Refeicao.COLUNA_REFEICAO_DIA,
             Refeicao.COLUNA_TOTAL
@@ -88,13 +89,14 @@ public class RefeicaoDAO extends AbstrataDAO{
             Open();
 
             // Mudar para COLUNA_ID_DADOS
-            String selection = Refeicao.COLUNA_ID + "=?";
+            String selection = Refeicao.COLUNA_ID_DADOS + "=?";
             String[] selectionArgs = { id_dados };
 
             cursor = db.query(Refeicao.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_ID));
+                int idDados = cursor.getInt(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_ID_DADOS));
                 Float custo = cursor.getFloat(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_CUSTO_REFEICAO));
                 Float refeicao_diaria = cursor.getFloat(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_REFEICAO_DIA));
                 Float total = cursor.getFloat(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_TOTAL));
@@ -102,6 +104,7 @@ public class RefeicaoDAO extends AbstrataDAO{
                 ref = new Refeicao();
 
                 ref.setId(id);
+                ref.setId_dados(idDados);
                 ref.setCusto_refeicao(custo);
                 ref.setRefeicao_dia(refeicao_diaria);
                 ref.setTotal(total);

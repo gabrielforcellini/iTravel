@@ -13,6 +13,7 @@ import java.util.List;
 public class HospedagemDAO extends AbstrataDAO{
     private static final String[] colunas = {
             Hospedagem.COLUNA_ID,
+            Hospedagem.COLUNA_ID_DADOS,
             Hospedagem.COLUNA_VALOR_DIARIA,
             Hospedagem.COLUNA_TOTAL_NOITES,
             Hospedagem.COLUNA_TOTAL_QUARTOS,
@@ -89,7 +90,7 @@ public class HospedagemDAO extends AbstrataDAO{
             Open();
 
             // Mudar para COLUNA_ID_DADOS
-            String selection = Hospedagem.COLUNA_ID_DADOS;
+            String selection = Hospedagem.COLUNA_ID_DADOS + "=?";
             String[] selectionArgs = { id_dados };
 
             cursor = db.query(Hospedagem.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);

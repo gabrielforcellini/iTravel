@@ -17,8 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.DAO.GasolinaDAO;
 import com.unesc.itravel.database.DAO.TarifaAereaDAO;
+import com.unesc.itravel.database.model.DadosUser;
 import com.unesc.itravel.database.model.Gasolina;
 import com.unesc.itravel.database.model.TarifaAerea;
 
@@ -114,11 +116,16 @@ public class TarifaAereaActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(edt_passagem.getText().toString()) || TextUtils.isEmpty(edt_alugel_carro.getText().toString())) {
             return;
         }
+        DadosUserDAO dadosUserDAO = new DadosUserDAO(TarifaAereaActivity.this);
+
+        long id_dados = preferences.getLong("id_dados", 99);
+        String idDados = String.valueOf(id_dados);
+        DadosUser dadosUser = dadosUserDAO.findOne(idDados);
 
         double valorPassagem = Double.parseDouble(edt_passagem.getText().toString());
         double valorAluguelCarro = Double.parseDouble(edt_alugel_carro.getText().toString());
 
-        double resultado = ((valorPassagem * 3) + valorAluguelCarro);
+        double resultado = ((valorPassagem * dadosUser.getViajantes()) + valorAluguelCarro);
 
         edt_total.setText(String.valueOf(resultado));
     }

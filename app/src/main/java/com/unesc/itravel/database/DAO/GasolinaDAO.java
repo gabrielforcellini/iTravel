@@ -14,6 +14,7 @@ import java.util.List;
 public class GasolinaDAO extends AbstrataDAO{
     private static final String[] colunas = {
             Gasolina.COLUNA_ID,
+            Gasolina.COLUNA_ID_DADOS,
             Gasolina.COLUNA_MEDIA_LITRO,
             Gasolina.COLUNA_CUSTO_LITRO,
             Gasolina.COLUNA_TOTAL_KM,
@@ -54,13 +55,14 @@ public class GasolinaDAO extends AbstrataDAO{
         try {
             Open();
 
-            String selection = Gasolina.COLUNA_ID + "=?";
+            String selection = Gasolina.COLUNA_ID_DADOS + "=?";
             String[] selectionArgs = {gasolina};
 
             cursor = db.query(Gasolina.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_ID));
+                int idDados = cursor.getInt(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_ID_DADOS));
                 Float total_km = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_TOTAL_KM));
                 Float media_litro = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_MEDIA_LITRO));
                 Float custo_litro = cursor.getFloat(cursor.getColumnIndexOrThrow(Gasolina.COLUNA_CUSTO_LITRO));
@@ -70,6 +72,7 @@ public class GasolinaDAO extends AbstrataDAO{
                 gas = new Gasolina();
 
                 gas.setId(id);
+                gas.setId_dados(idDados);
                 gas.setTotal_km(total_km);
                 gas.setMedia_litro(media_litro);
                 gas.setCusto_litro(custo_litro);

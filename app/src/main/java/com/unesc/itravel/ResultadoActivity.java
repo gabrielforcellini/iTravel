@@ -77,19 +77,19 @@ public class ResultadoActivity extends AppCompatActivity {
 
         TarifaAereaDAO tarifaAereaDAO = new TarifaAereaDAO(ResultadoActivity.this);
 
-        TarifaAerea tarifaAerea = tarifaAereaDAO.findOneByIdDados(id_dados);
+        TarifaAerea tarifaAerea = tarifaAereaDAO.findOneByIdDados(idDados);
 
         RefeicaoDAO refeicaoDAO = new RefeicaoDAO(ResultadoActivity.this);
 
-        Refeicao refeicao = refeicaoDAO.findOneByIdDados(id_dados);
+        Refeicao refeicao = refeicaoDAO.findOneByIdDados(idDados);
 
         EntretenimentoDAO entretenimentoDAO = new EntretenimentoDAO(ResultadoActivity.this);
 
-        Entretenimento entretenimento = entretenimentoDAO.findOneByIdDados(id_dados);
+        Entretenimento entretenimento = entretenimentoDAO.findOneByIdDados(idDados);
 
         DadosUserDAO dadosUserDAO = new DadosUserDAO(ResultadoActivity.this);
 
-        DadosUser dadosUser = dadosUserDAO.findOne(id_dados);
+        DadosUser dadosUser = dadosUserDAO.findOne(idDados);
 
         double totalHospedagem = hospedagem.getTotal();
         double totalTarifaAerea = tarifaAerea.getTotal();

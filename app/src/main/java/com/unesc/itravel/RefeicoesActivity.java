@@ -16,8 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.DAO.RefeicaoDAO;
 import com.unesc.itravel.database.DAO.TarifaAereaDAO;
+import com.unesc.itravel.database.model.DadosUser;
 import com.unesc.itravel.database.model.Refeicao;
 import com.unesc.itravel.database.model.TarifaAerea;
 
@@ -109,11 +111,15 @@ public class RefeicoesActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(edt_custo_refeicao.getText().toString()) || TextUtils.isEmpty(edt_refeicao_dia.getText().toString())) {
             return;
         }
+        DadosUserDAO dadosUserDAO = new DadosUserDAO(RefeicoesActivity.this);
 
+        long id_dados = preferences.getLong("id_dados", 99);
+        String idDados = String.valueOf(id_dados);
+        DadosUser dadosUser = dadosUserDAO.findOne(idDados);
         double custoRefeicao = Double.parseDouble(edt_custo_refeicao.getText().toString());
         double qtdRefeicaoDia = Double.parseDouble(edt_refeicao_dia.getText().toString());
 
-        double resultado = ((qtdRefeicaoDia * 3) * custoRefeicao) * 5;
+        double resultado = ((qtdRefeicaoDia * dadosUser.getViajantes()) * custoRefeicao) * dadosUser.getQtd_dias();
 
         edt_total_refeicao.setText(String.valueOf(resultado));
     }
