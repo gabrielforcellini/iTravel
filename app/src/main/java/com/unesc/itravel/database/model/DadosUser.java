@@ -52,10 +52,6 @@ public class DadosUser {
         this.id_login = id_login;
     }
 
-    public int getViajantes() {
-        return viajantes;
-    }
-
     public void setViajantes(int viajantes) {
         this.viajantes = viajantes;
     }
