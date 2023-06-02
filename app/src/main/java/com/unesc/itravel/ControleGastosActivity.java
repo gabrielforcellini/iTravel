@@ -31,14 +31,12 @@ public class ControleGastosActivity extends AppCompatActivity {
     private CheckBox check_box_entretenimento;
 
     SharedPreferences preferences;
-    SharedPreferences.Editor edit;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controle_gastos);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(ControleGastosActivity.this);
-        edit = preferences.edit();
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);

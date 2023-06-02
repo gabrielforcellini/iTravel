@@ -28,6 +28,7 @@ public class ResultadoDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(Resultado.COLUNA_ID_DADOS, resultadoModel.getId_dados());
             contentValues.put(Resultado.COLUNA_TOTAL, resultadoModel.getTotal());
             contentValues.put(Resultado.COLUNA_TOTAL_PESSOA, resultadoModel.getTotal_pessoa());
 
@@ -64,8 +65,13 @@ public class ResultadoDAO extends AbstrataDAO{
             }
         }
         finally {
-            cursor.close();
-            Close();
+            if (cursor != null) {
+                cursor.close();
+            }
+
+            if (db != null) {
+                db.close();
+            }
         }
 
         return result;

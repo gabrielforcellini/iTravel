@@ -77,7 +77,7 @@ public class LoginDAO extends AbstrataDAO {
             }
 
             if (db != null) {
-                db.close();
+//                db.close();
             }
         }
 

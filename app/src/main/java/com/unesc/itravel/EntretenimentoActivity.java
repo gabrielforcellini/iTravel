@@ -33,10 +33,12 @@ public class EntretenimentoActivity extends AppCompatActivity {
     private Button btn_previous;
     private EditText edt_entretenimento;
     private EditText edt_total;
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entretenimento);
+        preferences = PreferenceManager.getDefaultSharedPreferences(EntretenimentoActivity.this);
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
@@ -58,7 +60,13 @@ public class EntretenimentoActivity extends AppCompatActivity {
                     float valor_entretenimento = Float.parseFloat(edt_entretenimento.getText().toString());
                     float total = Float.parseFloat(edt_total.getText().toString());
 
-                    Entretenimento entretenimento = new Entretenimento(valor_entretenimento, total);
+                    long id_dados = preferences.getLong("id_dados", 99);
+                    if (id_dados == 99){
+                        Toast.makeText(EntretenimentoActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Entretenimento entretenimento = new Entretenimento(id_dados, valor_entretenimento, total);
                     entretenimentoDAO.insert(entretenimento);
                     Toast.makeText(EntretenimentoActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(EntretenimentoActivity.this, ControleGastosActivity.class));
@@ -103,13 +111,15 @@ public class EntretenimentoActivity extends AppCompatActivity {
         double valorEntretenimento = Double.parseDouble(edt_entretenimento.getText().toString());
 
         try {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(EntretenimentoActivity.this);
+//            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(EntretenimentoActivity.this);
 
-            String id_dados = sharedPreferences.getString("id_dados", "");
+//            String id_dados = sharedPreferences.getString("id_dados", "");
+            long id_dados = preferences.getLong("id_dados", 99);
+            String idDados = String.valueOf(id_dados);
 
             DadosUserDAO dadosUserDAO = new DadosUserDAO(EntretenimentoActivity.this);
 
-            DadosUser dadosUser = dadosUserDAO.findOne(id_dados);
+            DadosUser dadosUser = dadosUserDAO.findOne(idDados);
 
             double resultado = valorEntretenimento * dadosUser.getQtd_dias();
             edt_total.setText(String.valueOf(resultado));

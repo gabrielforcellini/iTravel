@@ -4,11 +4,13 @@ public class TarifaAerea {
     public static final String TABLE_NAME = "tarifa_aerea";
     public static final String
             COLUNA_ID = "_id",
+            COLUNA_ID_DADOS = "_idDados",
             COLUNA_PASSAGEM = "_passagem",
             COLUNA_ALUGUEL_CARRO = "_aluguel_carro",
             COLUNA_TOTAL = "_total";
 
     private long id;
+    private long id_dados;
     private Float passagem;
     private Float aluguel_carro;
     private Float total;
@@ -16,6 +18,7 @@ public class TarifaAerea {
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
             + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_ID_DADOS + " integer not null, "
             + COLUNA_PASSAGEM + " REAL not null, "
             + COLUNA_ALUGUEL_CARRO + " REAL not null, "
             + COLUNA_TOTAL + " REAL not null "
@@ -26,7 +29,8 @@ public class TarifaAerea {
     public TarifaAerea() {
     }
 
-    public TarifaAerea(Float passagem, Float aluguel_carro, Float total) {
+    public TarifaAerea(long id_dados, Float passagem, Float aluguel_carro, Float total) {
+        this.id_dados = id_dados;
         this.passagem = passagem;
         this.aluguel_carro = aluguel_carro;
         this.total = total;
@@ -38,6 +42,14 @@ public class TarifaAerea {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId_dados() {
+        return id_dados;
+    }
+
+    public void setId_dados(long id_dados) {
+        this.id_dados = id_dados;
     }
 
     public Float getPassagem() {

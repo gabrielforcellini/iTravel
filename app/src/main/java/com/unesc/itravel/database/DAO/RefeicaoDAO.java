@@ -28,6 +28,7 @@ public class RefeicaoDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(Refeicao.COLUNA_ID_DADOS, refeicaoModel.getId_dados());
             contentValues.put(Refeicao.COLUNA_CUSTO_REFEICAO, refeicaoModel.getCusto_refeicao());
             contentValues.put(Refeicao.COLUNA_REFEICAO_DIA, refeicaoModel.getRefeicao_dia());
             contentValues.put(Refeicao.COLUNA_TOTAL, refeicaoModel.getTotal());

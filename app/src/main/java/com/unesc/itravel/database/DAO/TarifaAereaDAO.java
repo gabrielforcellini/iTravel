@@ -29,6 +29,7 @@ public class TarifaAereaDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(TarifaAerea.COLUNA_ID_DADOS, tarifaAereaModel.getId_dados());
             contentValues.put(TarifaAerea.COLUNA_PASSAGEM, tarifaAereaModel.getPassagem());
             contentValues.put(TarifaAerea.COLUNA_ALUGUEL_CARRO, tarifaAereaModel.getAluguel_carro());
             contentValues.put(TarifaAerea.COLUNA_TOTAL, tarifaAereaModel.getTotal());

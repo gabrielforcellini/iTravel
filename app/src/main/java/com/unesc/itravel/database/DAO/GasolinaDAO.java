@@ -31,6 +31,7 @@ public class GasolinaDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(Gasolina.COLUNA_ID_DADOS, gasolinaModel.getId_dados());
             contentValues.put(Gasolina.COLUNA_TOTAL_KM, gasolinaModel.getTotal_km().floatValue());
             contentValues.put(Gasolina.COLUNA_MEDIA_LITRO, gasolinaModel.getMedia_litro().floatValue());
             contentValues.put(Gasolina.COLUNA_CUSTO_LITRO, gasolinaModel.getCusto_litro().floatValue());

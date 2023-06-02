@@ -1,8 +1,10 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -28,10 +30,14 @@ public class RefeicoesActivity extends AppCompatActivity {
     private EditText edt_custo_refeicao;
     private EditText edt_refeicao_dia;
     private EditText edt_total_refeicao;
+
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refeicoes);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(RefeicoesActivity.this);
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
@@ -56,7 +62,13 @@ public class RefeicoesActivity extends AppCompatActivity {
                     float refeicao_dia = Float.parseFloat(edt_refeicao_dia.getText().toString());
                     float total = Float.parseFloat(edt_total_refeicao.getText().toString());
 
-                    Refeicao refeicao = new Refeicao(custo, refeicao_dia, total);
+                    long id_dados = preferences.getLong("id_dados", 99);
+                    if (id_dados == 99){
+                        Toast.makeText(RefeicoesActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Refeicao refeicao = new Refeicao(id_dados, custo, refeicao_dia, total);
                     refeicaoDAO.insert(refeicao);
                     Toast.makeText(RefeicoesActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RefeicoesActivity.this, HospedagemActivity.class));

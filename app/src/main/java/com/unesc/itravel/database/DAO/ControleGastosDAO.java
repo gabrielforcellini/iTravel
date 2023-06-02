@@ -42,7 +42,7 @@ public class ControleGastosDAO extends AbstrataDAO{
             rowAffect = db.insert(ControleGastos.TABLE_NAME, null, contentValues);
         }
         finally {
-            Close();
+//            Close();
         }
 
         return rowAffect;

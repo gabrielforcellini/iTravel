@@ -27,10 +27,14 @@ public class ResultadoActivity extends AppCompatActivity {
 
     private EditText edt_total;
     private EditText edt_total_pessoa;
+
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(ResultadoActivity.this);
 
 //        btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_previous);
@@ -54,13 +58,16 @@ public class ResultadoActivity extends AppCompatActivity {
 
     private void calcularValorTotalAndInserirInformacoes() {
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ResultadoActivity.this);
-
-        String id_dados = sharedPreferences.getString("id_dados", "");
+        long id_dados = preferences.getLong("id_dados", 99);
+        if (id_dados == 99){
+            Toast.makeText(ResultadoActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         HospedagemDAO hospedagemDAO = new HospedagemDAO(ResultadoActivity.this);
+        String idDados = String.valueOf(id_dados);
 
-        Hospedagem hospedagem = hospedagemDAO.findOneByIdDados(id_dados);
+        Hospedagem hospedagem = hospedagemDAO.findOneByIdDados(idDados);
 
         double totalHospedagem = hospedagem.getTotal();
         double totalTarifaAerea = 4000;
@@ -79,7 +86,7 @@ public class ResultadoActivity extends AppCompatActivity {
             float custo_total = Float.parseFloat(edt_total.getText().toString());
             float total_pessoa = Float.parseFloat(edt_total_pessoa.getText().toString());
 
-            Resultado resultado = new Resultado(custo_total, total_pessoa);
+            Resultado resultado = new Resultado(id_dados, custo_total, total_pessoa);
             resultadoDAO.insert(resultado);
             Toast.makeText(ResultadoActivity.this, "Total das despesas da viagem.", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {

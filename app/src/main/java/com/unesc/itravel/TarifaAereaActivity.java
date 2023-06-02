@@ -1,8 +1,10 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -30,10 +32,14 @@ public class TarifaAereaActivity extends AppCompatActivity {
     private EditText edt_passagem;
     private EditText edt_alugel_carro;
     private EditText edt_total;
+
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarifa_aerea);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(TarifaAereaActivity.this);
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
@@ -58,8 +64,13 @@ public class TarifaAereaActivity extends AppCompatActivity {
                     float passagem = Float.parseFloat(edt_passagem.getText().toString());
                     float aluguelCarro = Float.parseFloat(edt_alugel_carro.getText().toString());
                     float total = Float.parseFloat(edt_total.getText().toString());
+                    long id_dados = preferences.getLong("id_dados", 99);
+                    if (id_dados == 99){
+                        Toast.makeText(TarifaAereaActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                    TarifaAerea tarifaAerea = new TarifaAerea(passagem, aluguelCarro, total);
+                    TarifaAerea tarifaAerea = new TarifaAerea(id_dados, passagem, aluguelCarro, total);
                     tarifaAereaDAO.insert(tarifaAerea);
                     Toast.makeText(TarifaAereaActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(TarifaAereaActivity.this, RefeicoesActivity.class));

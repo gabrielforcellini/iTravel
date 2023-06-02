@@ -1,13 +1,16 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.unesc.itravel.Utils;
@@ -39,10 +42,13 @@ public class GasolinaActivity extends AppCompatActivity {
     private Float custo_litro;
     private Float total_veic;
     private Float total;
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gasolina);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(GasolinaActivity.this);
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
@@ -73,7 +79,13 @@ public class GasolinaActivity extends AppCompatActivity {
                     total_veic = Float.parseFloat(edt_total_veic.getText().toString());
                     total = Float.parseFloat(edt_total.getText().toString());
 
-                    Gasolina gasolina = new Gasolina(total_km, media_litro, custo_litro, total_veic, total);
+                    long id_dados = preferences.getLong("id_dados", 99);
+                    if (id_dados == 99){
+                        Toast.makeText(GasolinaActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Gasolina gasolina = new Gasolina(id_dados, total_km, media_litro, custo_litro, total_veic, total);
                     gasolinaDAO.insert(gasolina);
                     Snackbar.make(findViewById(android.R.id.content), "salvo.", Snackbar.LENGTH_SHORT).show();
                     startActivity(new Intent(GasolinaActivity.this, RefeicoesActivity.class));

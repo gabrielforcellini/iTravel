@@ -4,16 +4,19 @@ public class Resultado {
     public static final String TABLE_NAME = "resultados";
     public static final String
             COLUNA_ID = "_id",
+            COLUNA_ID_DADOS = "_idDados",
             COLUNA_TOTAL = "_total",
             COLUNA_TOTAL_PESSOA = "_total_pessoa";
 
     private long id;
+    private long id_dados;
     private Float total;
     private Float total_pessoa;
 
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
             + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_ID_DADOS + " integer not null, "
             + COLUNA_TOTAL + " REAL not null, "
             + COLUNA_TOTAL_PESSOA + " REAL not null "
             + ");";
@@ -23,7 +26,8 @@ public class Resultado {
     public Resultado() {
     }
 
-    public Resultado(Float total, Float total_pessoa) {
+    public Resultado(long id_dados, Float total, Float total_pessoa) {
+        this.id_dados = id_dados;
         this.total = total;
         this.total_pessoa = total_pessoa;
     }
@@ -34,6 +38,14 @@ public class Resultado {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId_dados() {
+        return id_dados;
+    }
+
+    public void setId_dados(long id_dados) {
+        this.id_dados = id_dados;
     }
 
     public Float getTotal() {

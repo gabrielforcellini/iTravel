@@ -1,8 +1,10 @@
 package com.unesc.itravel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -29,10 +31,14 @@ public class HospedagemActivity extends AppCompatActivity {
     private EditText edt_noite;
     private EditText edt_quarto;
     private EditText edt_total;
+
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospedagem);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(HospedagemActivity.this);
 
         btn_next = findViewById(R.id.btn_next);
         btn_previous = findViewById(R.id.btn_voltar);
@@ -60,7 +66,13 @@ public class HospedagemActivity extends AppCompatActivity {
                     float total_quartos = Float.parseFloat(edt_quarto.getText().toString());
                     float total = Float.parseFloat(edt_total.getText().toString());
 
-                    Hospedagem hospedagem = new Hospedagem(valor_diaria, total_noites, total_quartos, total);
+                    long id_dados = preferences.getLong("id_dados", 99);
+                    if (id_dados == 99){
+                        Toast.makeText(HospedagemActivity.this, "Voce precisa informar os dados da viagem.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Hospedagem hospedagem = new Hospedagem(id_dados, valor_diaria, total_noites, total_quartos, total);
                     hospedagemDAO.insert(hospedagem);
                     Toast.makeText(HospedagemActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(HospedagemActivity.this, EntretenimentoActivity.class));

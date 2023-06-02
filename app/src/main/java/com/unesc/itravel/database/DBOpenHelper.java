@@ -19,7 +19,7 @@ import com.unesc.itravel.database.model.TarifaAerea;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NOME = "banco.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
 
 
     public DBOpenHelper(Context context) {
@@ -53,7 +53,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(Entretenimento.DROP_TABLE);
             sqLiteDatabase.execSQL(TarifaAerea.DROP_TABLE);
 //            sqLiteDatabase.execSQL(DadosUser.DROP_TABLE);
-            sqLiteDatabase.execSQL(ControleGastos.DROP_TABLE);
+//            sqLiteDatabase.execSQL(ControleGastos.DROP_TABLE);
             sqLiteDatabase.execSQL(Resultado.DROP_TABLE);
 
 //            sqLiteDatabase.execSQL(Login.CREATE_TABLE);
@@ -63,7 +63,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(Entretenimento.CREATE_TABLE);
             sqLiteDatabase.execSQL(TarifaAerea.CREATE_TABLE);
 //            sqLiteDatabase.execSQL(DadosUser.CREATE_TABLE);
-            sqLiteDatabase.execSQL(ControleGastos.CREATE_TABLE);
+//            sqLiteDatabase.execSQL(ControleGastos.CREATE_TABLE);
             sqLiteDatabase.execSQL(Resultado.CREATE_TABLE);
         }catch(SQLException e) {
             System.out.println("Erro ao criar tabela gasolina: " + e.getMessage());

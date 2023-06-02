@@ -29,6 +29,7 @@ public class HospedagemDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(Hospedagem.COLUNA_ID_DADOS, hospedagemModel.getId_dados());
             contentValues.put(Hospedagem.COLUNA_VALOR_DIARIA, hospedagemModel.getValor_diaria());
             contentValues.put(Hospedagem.COLUNA_TOTAL_NOITES, hospedagemModel.getTotal_noites());
             contentValues.put(Hospedagem.COLUNA_TOTAL_QUARTOS, hospedagemModel.getTotal_quartos());
@@ -88,12 +89,13 @@ public class HospedagemDAO extends AbstrataDAO{
             Open();
 
             // Mudar para COLUNA_ID_DADOS
-            String selection = Hospedagem.COLUNA_ID;
+            String selection = Hospedagem.COLUNA_ID_DADOS;
             String[] selectionArgs = { id_dados };
 
             cursor = db.query(Hospedagem.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_ID));
+                int idDados = cursor.getInt(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_ID_DADOS));
                 Float valor_diaria = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_VALOR_DIARIA));
                 Float total_noites = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL_NOITES));
                 Float total_quartos = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL_QUARTOS));
@@ -102,14 +104,20 @@ public class HospedagemDAO extends AbstrataDAO{
                 hosp = new Hospedagem();
 
                 hosp.setId(id);
+                hosp.setId_dados(idDados);
                 hosp.setValor_diaria(valor_diaria);
                 hosp.setTotal_noites(total_noites);
                 hosp.setTotal_quartos(total_quartos);
                 hosp.setTotal(total);
             }
         } finally {
-            cursor.close();
-            Close();
+            if (cursor != null) {
+                cursor.close();
+            }
+
+            if (db != null) {
+//                db.close();
+            }
         }
         return hosp;
     }

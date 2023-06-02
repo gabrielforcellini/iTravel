@@ -4,12 +4,14 @@ public class Hospedagem {
     public static final String TABLE_NAME = "hospedagem";
     public static final String
             COLUNA_ID = "_id",
+            COLUNA_ID_DADOS = "_idDados",
             COLUNA_VALOR_DIARIA = "_valor_diaria",
             COLUNA_TOTAL_NOITES = "_total_noites",
             COLUNA_TOTAL_QUARTOS = "_total_quartos",
             COLUNA_TOTAL = "_total";
 
     private long id;
+    private long id_dados;
     private Float valor_diaria;
     private Float total_noites;
     private Float total_quartos;
@@ -18,6 +20,7 @@ public class Hospedagem {
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
             + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_ID_DADOS + " integer not null, "
             + COLUNA_VALOR_DIARIA + " REAL not null, "
             + COLUNA_TOTAL_NOITES + " REAL not null, "
             + COLUNA_TOTAL_QUARTOS + " REAL not null, "
@@ -29,7 +32,8 @@ public class Hospedagem {
     public Hospedagem() {
     }
 
-    public Hospedagem(Float valor_diaria, Float total_noites, Float total_quartos, Float total) {
+    public Hospedagem(long id_dados, Float valor_diaria, Float total_noites, Float total_quartos, Float total) {
+        this.id_dados = id_dados;
         this.valor_diaria = valor_diaria;
         this.total_noites = total_noites;
         this.total_quartos = total_quartos;
@@ -42,6 +46,14 @@ public class Hospedagem {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId_dados() {
+        return id_dados;
+    }
+
+    public void setId_dados(long id_dados) {
+        this.id_dados = id_dados;
     }
 
     public Float getValor_diaria() {

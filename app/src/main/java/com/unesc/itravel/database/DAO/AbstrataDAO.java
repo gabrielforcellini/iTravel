@@ -17,6 +17,6 @@ public abstract class AbstrataDAO {
 
     protected final void Close() throws SQLException{
         //Fecha conexao com o banco
-        db_helper.close();
+//        db_helper.close();
     }
 }

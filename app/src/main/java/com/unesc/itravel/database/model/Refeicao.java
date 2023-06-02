@@ -4,11 +4,13 @@ public class Refeicao {
     public static final String TABLE_NAME = "refeicao";
     public static final String
             COLUNA_ID = "_id",
+            COLUNA_ID_DADOS = "_idDados",
             COLUNA_CUSTO_REFEICAO = "_custo_refeicao",
             COLUNA_REFEICAO_DIA = "_refeicao_dia",
             COLUNA_TOTAL = "_total";
 
     private long id;
+    private long id_dados;
     private Float custo_refeicao;
     private Float refeicao_dia;
     private Float total;
@@ -16,6 +18,7 @@ public class Refeicao {
     public static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "("
             + COLUNA_ID + " integer primary key autoincrement, "
+            + COLUNA_ID_DADOS + " integer not null, "
             + COLUNA_CUSTO_REFEICAO + " REAL not null, "
             + COLUNA_REFEICAO_DIA + " REAL not null, "
             + COLUNA_TOTAL + " REAL not null "
@@ -26,7 +29,8 @@ public class Refeicao {
     public Refeicao() {
     }
 
-    public Refeicao(Float custo_refeicao, Float refeicao_dia, Float total) {
+    public Refeicao(long id_dados, Float custo_refeicao, Float refeicao_dia, Float total) {
+        this.id_dados = id_dados;
         this.custo_refeicao = custo_refeicao;
         this.refeicao_dia = refeicao_dia;
         this.total = total;
@@ -38,6 +42,14 @@ public class Refeicao {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getId_dados() {
+        return id_dados;
+    }
+
+    public void setId_dados(long id_dados) {
+        this.id_dados = id_dados;
     }
 
     public Float getCusto_refeicao() {

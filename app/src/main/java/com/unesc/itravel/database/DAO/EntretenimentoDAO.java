@@ -28,6 +28,7 @@ public class EntretenimentoDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(Entretenimento.COLUNA_ID_DADOS, entretenimentoModel.getId_dados());
             contentValues.put(Entretenimento.COLUNA_VALOR_ENTRETENIMENTO, entretenimentoModel.getValor_entretenimento());
             contentValues.put(Entretenimento.COLUNA_TOTAL, entretenimentoModel.getTotal());
 
