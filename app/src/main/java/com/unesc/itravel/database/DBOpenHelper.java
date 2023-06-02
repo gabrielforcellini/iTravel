@@ -19,7 +19,7 @@ import com.unesc.itravel.database.model.TarifaAerea;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NOME = "banco.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 6;
 
 
     public DBOpenHelper(Context context) {
@@ -46,23 +46,23 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         try {
-           // sqLiteDatabase.execSQL(Login.DROP_TABLE);
+//            sqLiteDatabase.execSQL(Login.DROP_TABLE);
             sqLiteDatabase.execSQL(Gasolina.DROP_TABLE);
             sqLiteDatabase.execSQL(Hospedagem.DROP_TABLE);
             sqLiteDatabase.execSQL(Refeicao.DROP_TABLE);
             sqLiteDatabase.execSQL(Entretenimento.DROP_TABLE);
             sqLiteDatabase.execSQL(TarifaAerea.DROP_TABLE);
-            sqLiteDatabase.execSQL(DadosUser.DROP_TABLE);
+//            sqLiteDatabase.execSQL(DadosUser.DROP_TABLE);
             sqLiteDatabase.execSQL(ControleGastos.DROP_TABLE);
             sqLiteDatabase.execSQL(Resultado.DROP_TABLE);
 
-            //sqLiteDatabase.execSQL(Login.CREATE_TABLE);
+//            sqLiteDatabase.execSQL(Login.CREATE_TABLE);
             sqLiteDatabase.execSQL(Gasolina.CREATE_TABLE);
             sqLiteDatabase.execSQL(Hospedagem.CREATE_TABLE);
             sqLiteDatabase.execSQL(Refeicao.CREATE_TABLE);
             sqLiteDatabase.execSQL(Entretenimento.CREATE_TABLE);
             sqLiteDatabase.execSQL(TarifaAerea.CREATE_TABLE);
-            sqLiteDatabase.execSQL(DadosUser.CREATE_TABLE);
+//            sqLiteDatabase.execSQL(DadosUser.CREATE_TABLE);
             sqLiteDatabase.execSQL(ControleGastos.CREATE_TABLE);
             sqLiteDatabase.execSQL(Resultado.CREATE_TABLE);
         }catch(SQLException e) {

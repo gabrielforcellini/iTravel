@@ -14,6 +14,7 @@ import java.util.List;
 public class ControleGastosDAO extends AbstrataDAO{
     private static final String[] colunas = {
             ControleGastos.COLUNA_ID,
+            ControleGastos.COLUNA_ID_DADOS,
             ControleGastos.COLUNA_BOX_GASOLINA,
             ControleGastos.COLUNA_BOX_TARIFA,
             ControleGastos.COLUNA_BOX_REFEICAO,
@@ -31,6 +32,7 @@ public class ControleGastosDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(ControleGastos.COLUNA_ID_DADOS, controleGastosModel.getId_dados());
             contentValues.put(ControleGastos.COLUNA_BOX_GASOLINA, controleGastosModel.isBox_gasolina());
             contentValues.put(ControleGastos.COLUNA_BOX_TARIFA, controleGastosModel.isBox_tarifa());
             contentValues.put(ControleGastos.COLUNA_BOX_REFEICAO, controleGastosModel.isBox_refeicao());

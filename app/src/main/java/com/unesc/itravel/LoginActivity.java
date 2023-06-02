@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView link_criar_conta;
     SharedPreferences preferences;
     SharedPreferences.Editor edit;
-    private LoginDAO loginDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validaLogin(String usuario, String senha) {
         LoginDAO loginDao = new LoginDAO(LoginActivity.this);
         Login login = loginDao.findOne(usuario);
+        edit.putLong("id_login", login.getId());
+        edit.apply();
+
         if(login == null) {
             return false;
         }

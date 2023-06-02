@@ -6,11 +6,11 @@ import android.database.Cursor;
 
 import com.unesc.itravel.database.DBOpenHelper;
 import com.unesc.itravel.database.model.DadosUser;
-import com.unesc.itravel.database.model.TarifaAerea;
 
 public class DadosUserDAO extends AbstrataDAO{
     private static final String[] colunas = {
             DadosUser.COLUNA_ID,
+            DadosUser.COLUNA_ID_LOGIN,
             DadosUser.COLUNA_VIAJANTES,
             DadosUser.COLUNA_QTD_DIAS
     };
@@ -25,6 +25,7 @@ public class DadosUserDAO extends AbstrataDAO{
             Open();
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put(DadosUser.COLUNA_ID_LOGIN, dadosModel.getId_login());
             contentValues.put(DadosUser.COLUNA_VIAJANTES, dadosModel.getViajantes());
             contentValues.put(DadosUser.COLUNA_QTD_DIAS, dadosModel.getQtd_dias());
 
@@ -50,14 +51,17 @@ public class DadosUserDAO extends AbstrataDAO{
 
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_ID));
+                int id_login = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_ID_LOGIN));
                 int viajantes = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_VIAJANTES));
                 int qtdDias = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_QTD_DIAS));
 
                 dadosUser = new DadosUser();
 
                 dadosUser.setId(id);
-                dadosUser.setQtd_dias(qtdDias);
+                dadosUser.setId_login(id_login);
                 dadosUser.setViajantes(viajantes);
+                dadosUser.setQtd_dias(qtdDias);
+
             }
         }
         finally {
