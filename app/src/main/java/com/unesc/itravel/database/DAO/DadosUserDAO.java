@@ -38,29 +38,29 @@ public class DadosUserDAO extends AbstrataDAO{
         return rowAffect;
     }
 
-    public DadosUser findOne(String dadosUser) {
+    public DadosUser findOne(String id_dados) {
         Cursor cursor = null;
-        DadosUser dados = null;
+        DadosUser dadosUser = null;
         try {
             Open();
 
             String selection = DadosUser.COLUNA_ID + "=?";
-            String[] selectionArgs = {dadosUser};
+            String[] selectionArgs = { id_dados };
 
             cursor = db.query(DadosUser.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_ID));
                 int id_login = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_ID_LOGIN));
-                Float viajantes = cursor.getFloat(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_VIAJANTES));
-                Float qtdDias = cursor.getFloat(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_QTD_DIAS));
+                int viajantes = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_VIAJANTES));
+                int qtdDias = cursor.getInt(cursor.getColumnIndexOrThrow(DadosUser.COLUNA_QTD_DIAS));
 
-                dados = new DadosUser();
+                dadosUser = new DadosUser();
 
-                dados.setId(id);
-                dados.setId_login(id_login);
-                dados.setViajantes(viajantes);
-                dados.setQtd_dias(qtdDias);
+                dadosUser.setId(id);
+                dadosUser.setId_login(id_login);
+                dadosUser.setViajantes(viajantes);
+                dadosUser.setQtd_dias(qtdDias);
 
             }
         }
@@ -74,6 +74,6 @@ public class DadosUserDAO extends AbstrataDAO{
             }
         }
 
-        return dados;
+        return dadosUser;
     }
 }

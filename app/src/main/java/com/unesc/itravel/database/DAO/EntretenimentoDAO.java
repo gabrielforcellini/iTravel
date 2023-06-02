@@ -41,31 +41,27 @@ public class EntretenimentoDAO extends AbstrataDAO{
         return rowAffect;
     }
 
-    /*public Hospedagem findOne(String hospedagem) {
+    public Entretenimento findOneByIdDados(String id_dados) {
         Cursor cursor = null;
-        Hospedagem hosp = null;
+        Entretenimento entr = null;
         try {
             Open();
 
-            String selection = Hospedagem.COLUNA_ID + "=?";
-            String[] selectionArgs = {hospedagem};
+            // Mudar para COLUNA_ID_DADOS
+            String selection = Entretenimento.COLUNA_ID + "=?";
+            String[] selectionArgs = { id_dados };
 
-            cursor = db.query(Hospedagem.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
+            cursor = db.query(Entretenimento.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
 
             if (cursor.moveToFirst()) {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_ID));
-                Float valor_diaria = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_VALOR_DIARIA));
-                Float total_noites = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL_NOITES));
-                Float total_quartos = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL_QUARTOS));
-                Float total = cursor.getFloat(cursor.getColumnIndexOrThrow(Hospedagem.COLUNA_TOTAL));
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_ID));
+                float valor_entretenimento = cursor.getFloat(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_VALOR_ENTRETENIMENTO));
+                float valor_total = cursor.getFloat(cursor.getColumnIndexOrThrow(Entretenimento.COLUNA_TOTAL));
+                entr = new Entretenimento();
 
-                hosp = new Hospedagem();
-
-                hosp.setId(id);
-                hosp.setValor_diaria(valor_diaria);
-                hosp.setTotal_noites(total_noites);
-                hosp.setTotal_quartos(total_quartos);
-                hosp.setTotal(total);
+                entr.setId(id);
+                entr.setValor_entretenimento(valor_entretenimento);
+                entr.setTotal(valor_total);
             }
 
         }
@@ -74,6 +70,6 @@ public class EntretenimentoDAO extends AbstrataDAO{
             Close();
         }
 
-        return hosp;
-    }*/
+        return entr;
+    }
 }

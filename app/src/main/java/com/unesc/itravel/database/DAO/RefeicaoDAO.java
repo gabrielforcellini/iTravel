@@ -81,6 +81,46 @@ public class RefeicaoDAO extends AbstrataDAO{
         return ref;
     }
 
+    public Refeicao findOneByIdDados(String id_dados) {
+        Cursor cursor = null;
+        Refeicao ref = null;
+        try {
+            Open();
+
+            // Mudar para COLUNA_ID_DADOS
+            String selection = Refeicao.COLUNA_ID + "=?";
+            String[] selectionArgs = { id_dados };
+
+            cursor = db.query(Refeicao.TABLE_NAME, colunas, selection, selectionArgs, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_ID));
+                Float custo = cursor.getFloat(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_CUSTO_REFEICAO));
+                Float refeicao_diaria = cursor.getFloat(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_REFEICAO_DIA));
+                Float total = cursor.getFloat(cursor.getColumnIndexOrThrow(Refeicao.COLUNA_TOTAL));
+
+                ref = new Refeicao();
+
+                ref.setId(id);
+                ref.setCusto_refeicao(custo);
+                ref.setRefeicao_dia(refeicao_diaria);
+                ref.setTotal(total);
+
+            }
+        }
+        finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+
+            if (db != null) {
+                db.close();
+            }
+        }
+
+        return ref;
+    }
+
     public List<Refeicao> selectAll() {
         List<Refeicao> refeicoes = new ArrayList<>();
         try {

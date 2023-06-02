@@ -55,14 +55,14 @@ public class Dados1Activity extends AppCompatActivity {
                     try {
                         DadosUserDAO dadosUserDAO = new DadosUserDAO(Dados1Activity.this);
 
+                        float viajantes = Float.parseFloat(edt_viajantes.getText().toString());
+                        float qtd_dias = Float.parseFloat(edt_qtd_dias.getText().toString());
+
                         long id_login = preferences.getLong("id_login", 99);
                         if (id_login == 99){
                             Toast.makeText(Dados1Activity.this, "Usuário não existe.", Toast.LENGTH_SHORT).show();
                             return;
                         }
-
-                        float viajantes = Float.parseFloat(edt_viajantes.getText().toString());
-                        float qtd_dias = Float.parseFloat(edt_qtd_dias.getText().toString());
 
                         DadosUser dadosUser = new DadosUser(id_login, viajantes, qtd_dias);
                         long idDados = dadosUserDAO.insert(dadosUser);
