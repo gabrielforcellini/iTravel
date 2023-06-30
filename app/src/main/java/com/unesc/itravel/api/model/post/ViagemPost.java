@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ViagemPost implements Serializable {
 
-    private int id;
+    private long id;
     private int totalViajantes;
     private int duracaoViagem;
     private double custoTotalViagem;
@@ -12,7 +12,7 @@ public class ViagemPost implements Serializable {
 
     private String local;
 
-    private int idConta;
+    private long idConta;
 
     public int getTotalViajantes() {
         return totalViajantes;
@@ -54,19 +54,19 @@ public class ViagemPost implements Serializable {
         this.local = local;
     }
 
-    public int getIdConta() {
+    public long getIdConta() {
         return idConta;
     }
 
-    public void setIdConta(int idConta) {
+    public void setIdConta(long idConta) {
         this.idConta = idConta;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

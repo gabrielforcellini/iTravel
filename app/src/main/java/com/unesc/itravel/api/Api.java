@@ -2,7 +2,13 @@ package com.unesc.itravel.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.unesc.itravel.api.endpoint.ViagemEndpoint;
+import com.unesc.itravel.api.model.get.Viagem;
+import com.unesc.itravel.api.model.post.ViagemPost;
+import com.unesc.itravel.api.model.post.result.Resposta;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -18,15 +24,15 @@ public class Api {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
-//    public static void getViagem(int id, Callback<Viagem> callback) {
-//        ViagemEndPoint endPoint = retrofit.create(ViagemEndPoint.class);
-//        Call<Viagem> call = endPoint.getViagem(id);
-//        call.enqueue(callback);
-//    }
-//
-//    public static void postViagem(ViagemPost viagem, Callback<Resposta> callback) {
-//        ViagemEndPoint endPoint = retrofit.create(ViagemEndPoint.class);
-//        Call<Resposta> call = endPoint.postViagem(viagem);
-//        call.enqueue(callback);
-//    }
+    public static void getViagem(int id, Callback<Viagem> callback) {
+        ViagemEndpoint endPoint = retrofit.create(ViagemEndpoint.class);
+        Call<Viagem> call = endPoint.getViagem(id);
+        call.enqueue(callback);
+    }
+
+    public static void postViagem(ViagemPost viagem, Callback<Resposta> callback) {
+        ViagemEndpoint endPoint = retrofit.create(ViagemEndpoint.class);
+        Call<Resposta> call = endPoint.postViagem(viagem);
+        call.enqueue(callback);
+    }
 }

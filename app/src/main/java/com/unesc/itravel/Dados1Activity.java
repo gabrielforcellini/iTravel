@@ -2,6 +2,7 @@ package com.unesc.itravel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -13,8 +14,17 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.unesc.itravel.api.Api;
+import com.unesc.itravel.api.model.post.ViagemPost;
+import com.unesc.itravel.api.model.post.result.Resposta;
 import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.model.DadosUser;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Dados1Activity extends AppCompatActivity {
 
@@ -58,8 +68,8 @@ public class Dados1Activity extends AppCompatActivity {
                         int viajantes = Integer.parseInt(edt_viajantes.getText().toString());
                         int qtd_dias = Integer.parseInt(edt_qtd_dias.getText().toString());
 
-                        long id_login = preferences.getLong("id_login", 99);
-                        if (id_login == 99){
+                        long id_login = preferences.getLong("id_login", 9999);
+                        if (id_login == 9999){
                             Toast.makeText(Dados1Activity.this, "Usuário não existe.", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -70,6 +80,31 @@ public class Dados1Activity extends AppCompatActivity {
                         edit.apply();
 
                         Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+
+                        ViagemPost viagemPost = new ViagemPost();
+                        viagemPost.setId(19);
+                        viagemPost.setDuracaoViagem(qtd_dias);
+                        viagemPost.setTotalViajantes(viajantes);
+                        viagemPost.setCustoPorPessoa(0.00);
+                        viagemPost.setCustoTotalViagem(0.00);
+                        viagemPost.setLocal("Florianopolis");
+                        viagemPost.setIdConta(idDados);
+
+                        Api.postViagem(viagemPost, new Callback<Resposta>() {
+                            @Override
+                            public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                                if (response != null && response.isSuccessful()) {
+                                    Resposta resposta = response.body();
+                                    System.out.println("*********");
+                                    Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Resposta> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
 
                         RadioButton radioButtonSelecionado = findViewById(radioButtonId);
 
