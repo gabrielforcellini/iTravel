@@ -2,6 +2,7 @@ package com.unesc.itravel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -14,6 +15,10 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.unesc.itravel.Utils;
+import com.unesc.itravel.api.Api;
+import com.unesc.itravel.api.model.post.GasolinaPost;
+import com.unesc.itravel.api.model.post.ViagemPost;
+import com.unesc.itravel.api.model.post.result.Resposta;
 import com.unesc.itravel.database.DAO.GasolinaDAO;
 import com.unesc.itravel.database.DAO.LoginDAO;
 import com.unesc.itravel.database.model.Gasolina;
@@ -24,6 +29,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GasolinaActivity extends AppCompatActivity {
 
@@ -87,6 +97,41 @@ public class GasolinaActivity extends AppCompatActivity {
 
                     Gasolina gasolina = new Gasolina(id_dados, total_km, media_litro, custo_litro, total_veic, total);
                     gasolinaDAO.insert(gasolina);
+
+                    GasolinaPost gasolinaPost = new GasolinaPost();
+                    gasolinaPost.setId(19);
+                    gasolinaPost.setCustoMedioLitro(custo_litro);
+                    gasolinaPost.setMediaKMLitro(media_litro);
+                    gasolinaPost.setTotalEstimadoKM(Math.round(total_km)); // utilizado math.round pois na API recebe long
+                    gasolinaPost.setTotalVeiculos(Math.round(total_veic));
+                    gasolinaPost.setViagemId(id_dados);
+
+                    SweetAlertDialog pDialog = new SweetAlertDialog(GasolinaActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                    pDialog.setTitleText("Aguarde");
+                    pDialog.setContentText("Enviando dados ao servidor ...");
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+
+                    Api.postCustoGasolina(gasolinaPost, new Callback<Resposta>() {
+                        @Override
+                        public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                            if (response != null && response.isSuccessful()) {
+                                pDialog.cancel();
+                                Resposta resposta = response.body();
+                                System.out.println("*********");
+                                Toast.makeText(GasolinaActivity.this, "Custos gasolina gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Resposta> call, Throwable t) {
+                            pDialog.cancel();
+                            Toast.makeText(GasolinaActivity.this, "Erro ao gravar dados na API.", Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+                    });
+
                     Snackbar.make(findViewById(android.R.id.content), "salvo.", Snackbar.LENGTH_SHORT).show();
                     startActivity(new Intent(GasolinaActivity.this, RefeicoesActivity.class));
                 } catch (Exception e) {

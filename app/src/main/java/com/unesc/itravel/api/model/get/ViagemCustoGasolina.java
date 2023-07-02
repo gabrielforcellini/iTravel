@@ -1,4 +1,6 @@
 package com.unesc.itravel.api.model.get;
 
-public class ViagemCustoGasolina {
+import java.io.Serializable;
+
+public class ViagemCustoGasolina implements Serializable {
 }

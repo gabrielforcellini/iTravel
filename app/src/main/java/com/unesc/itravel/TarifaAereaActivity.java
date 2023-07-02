@@ -2,6 +2,7 @@ package com.unesc.itravel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
@@ -17,6 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.unesc.itravel.api.Api;
+import com.unesc.itravel.api.model.post.GasolinaPost;
+import com.unesc.itravel.api.model.post.ViagemCustoAereoPost;
+import com.unesc.itravel.api.model.post.result.Resposta;
 import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.DAO.GasolinaDAO;
 import com.unesc.itravel.database.DAO.TarifaAereaDAO;
@@ -26,6 +31,11 @@ import com.unesc.itravel.database.model.TarifaAerea;
 
 import java.util.Arrays;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TarifaAereaActivity extends AppCompatActivity {
 
@@ -74,6 +84,39 @@ public class TarifaAereaActivity extends AppCompatActivity {
 
                     TarifaAerea tarifaAerea = new TarifaAerea(id_dados, passagem, aluguelCarro, total);
                     tarifaAereaDAO.insert(tarifaAerea);
+
+                    ViagemCustoAereoPost custoAereoPost = new ViagemCustoAereoPost();
+                    custoAereoPost.setId(19);
+                    custoAereoPost.setCustoPessoa(total);
+                    custoAereoPost.setCustoAluguelVeiculo(aluguelCarro);
+                    custoAereoPost.setViagemId(id_dados);
+
+                    SweetAlertDialog pDialog = new SweetAlertDialog(TarifaAereaActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                    pDialog.setTitleText("Aguarde");
+                    pDialog.setContentText("Enviando dados ao servidor ...");
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+
+                    Api.postViagemCustoAereo(custoAereoPost, new Callback<Resposta>() {
+                        @Override
+                        public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                            if (response != null && response.isSuccessful()) {
+                                pDialog.cancel();
+                                Resposta resposta = response.body();
+                                System.out.println("*********");
+                                Toast.makeText(TarifaAereaActivity.this, "Custos aereos gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Resposta> call, Throwable t) {
+                            pDialog.cancel();
+                            Toast.makeText(TarifaAereaActivity.this, "Erro ao gravar dados na API.", Toast.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+                    });
+
                     Toast.makeText(TarifaAereaActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(TarifaAereaActivity.this, RefeicoesActivity.class));
                 } catch (Exception e) {

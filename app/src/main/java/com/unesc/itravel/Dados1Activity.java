@@ -79,8 +79,6 @@ public class Dados1Activity extends AppCompatActivity {
                         edit.putLong("id_dados", idDados);
                         edit.apply();
 
-                        Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
-
                         ViagemPost viagemPost = new ViagemPost();
                         viagemPost.setId(19);
                         viagemPost.setDuracaoViagem(qtd_dias);
@@ -90,10 +88,20 @@ public class Dados1Activity extends AppCompatActivity {
                         viagemPost.setLocal("Florianopolis");
                         viagemPost.setIdConta(idDados);
 
+                        SweetAlertDialog pDialog = new SweetAlertDialog(Dados1Activity.this, SweetAlertDialog.PROGRESS_TYPE);
+                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        pDialog.setTitleText("Aguarde");
+                        pDialog.setContentText("Enviando dados ao servidor ...");
+                        pDialog.setCancelable(false);
+                        pDialog.show();
+
+                        Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+
                         Api.postViagem(viagemPost, new Callback<Resposta>() {
                             @Override
                             public void onResponse(Call<Resposta> call, Response<Resposta> response) {
                                 if (response != null && response.isSuccessful()) {
+                                    pDialog.cancel();
                                     Resposta resposta = response.body();
                                     System.out.println("*********");
                                     Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
@@ -102,6 +110,7 @@ public class Dados1Activity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<Resposta> call, Throwable t) {
+                                pDialog.cancel();
                                 t.printStackTrace();
                             }
                         });
