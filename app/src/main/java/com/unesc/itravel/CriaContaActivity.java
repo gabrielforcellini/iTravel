@@ -54,7 +54,7 @@ public class CriaContaActivity extends AppCompatActivity {
                 Login login = new Login(nome, usuario, senha);
                 loginDAO.insert(login, CriaContaActivity.this);
                 Snackbar.make(findViewById(android.R.id.content), "Usuário criado.", Snackbar.LENGTH_SHORT).show();
-                startActivity(new Intent(CriaContaActivity.this, Dados1Activity.class));
+                startActivity(new Intent(CriaContaActivity.this, LoginActivity.class));
             }
         });
 
