@@ -85,7 +85,7 @@ public class HospedagemActivity extends AppCompatActivity {
                     hospedagemDAO.insert(hospedagem);
 
                     ViagemCustoHospedagemPost hospedagemPost = new ViagemCustoHospedagemPost();
-                    hospedagemPost.setId(19);
+                    hospedagemPost.setId(preferences.getInt("KEY_ID", 0));
                     hospedagemPost.setCustoMedioNoite(total_noites / 1);
                     hospedagemPost.setTotalQuartos(Math.round(total_quartos));
                     hospedagemPost.setTotalNoite(Math.round(total_noites));
@@ -104,8 +104,8 @@ public class HospedagemActivity extends AppCompatActivity {
                             if (response != null && response.isSuccessful()) {
                                 pDialog.cancel();
                                 Resposta resposta = response.body();
-                                System.out.println("*********");
-                                Toast.makeText(HospedagemActivity.this, "Custos gasolina gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HospedagemActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(HospedagemActivity.this, EntretenimentoActivity.class));
                             }
                         }
 
@@ -116,9 +116,6 @@ public class HospedagemActivity extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     });
-
-                    Toast.makeText(HospedagemActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(HospedagemActivity.this, EntretenimentoActivity.class));
                 } catch (Exception e) {
                     Toast.makeText(HospedagemActivity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();
                 }

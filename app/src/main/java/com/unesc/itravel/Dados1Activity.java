@@ -80,7 +80,7 @@ public class Dados1Activity extends AppCompatActivity {
                         edit.apply();
 
                         ViagemPost viagemPost = new ViagemPost();
-                        viagemPost.setId(19);
+                        //viagemPost.setId(19);
                         viagemPost.setDuracaoViagem(qtd_dias);
                         viagemPost.setTotalViajantes(viajantes);
                         viagemPost.setCustoPorPessoa(0.00);
@@ -103,8 +103,15 @@ public class Dados1Activity extends AppCompatActivity {
                                 if (response != null && response.isSuccessful()) {
                                     pDialog.cancel();
                                     Resposta resposta = response.body();
-                                    System.out.println("*********");
-                                    Toast.makeText(Dados1Activity.this, "Dados gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                                    preferences.edit().putInt("KEY_ID", resposta.getChavePrimaria()).apply();
+
+                                    RadioButton radioButtonSelecionado = findViewById(radioButtonId);
+
+                                    if (radioButtonSelecionado.getId() == R.id.radio_btn_carro) {
+                                        startActivity(new Intent(Dados1Activity.this, GasolinaActivity.class));
+                                    } else {
+                                        startActivity(new Intent(Dados1Activity.this, TarifaAereaActivity.class));
+                                    }
                                 }
                             }
 
@@ -115,13 +122,7 @@ public class Dados1Activity extends AppCompatActivity {
                             }
                         });
 
-                        RadioButton radioButtonSelecionado = findViewById(radioButtonId);
 
-                        if (radioButtonSelecionado.getId() == R.id.radio_btn_carro) {
-                            startActivity(new Intent(Dados1Activity.this, GasolinaActivity.class));
-                        } else {
-                            startActivity(new Intent(Dados1Activity.this, TarifaAereaActivity.class));
-                        }
 
                     } catch (Exception e) {
                         Toast.makeText(Dados1Activity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();

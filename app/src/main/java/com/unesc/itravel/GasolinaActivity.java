@@ -99,7 +99,7 @@ public class GasolinaActivity extends AppCompatActivity {
                     gasolinaDAO.insert(gasolina);
 
                     GasolinaPost gasolinaPost = new GasolinaPost();
-                    gasolinaPost.setId(19);
+                    gasolinaPost.setId(preferences.getInt("KEY_ID", 0));
                     gasolinaPost.setCustoMedioLitro(custo_litro);
                     gasolinaPost.setMediaKMLitro(media_litro);
                     gasolinaPost.setTotalEstimadoKM(Math.round(total_km)); // utilizado math.round pois na API recebe long
@@ -119,8 +119,8 @@ public class GasolinaActivity extends AppCompatActivity {
                             if (response != null && response.isSuccessful()) {
                                 pDialog.cancel();
                                 Resposta resposta = response.body();
-                                System.out.println("*********");
-                                Toast.makeText(GasolinaActivity.this, "Custos gasolina gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(android.R.id.content), "salvo.", Snackbar.LENGTH_SHORT).show();
+                                startActivity(new Intent(GasolinaActivity.this, RefeicoesActivity.class));
                             }
                         }
 
@@ -131,9 +131,6 @@ public class GasolinaActivity extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     });
-
-                    Snackbar.make(findViewById(android.R.id.content), "salvo.", Snackbar.LENGTH_SHORT).show();
-                    startActivity(new Intent(GasolinaActivity.this, RefeicoesActivity.class));
                 } catch (Exception e) {
                     Snackbar.make(findViewById(android.R.id.content), "Erro: "+e.toString(), Snackbar.LENGTH_SHORT).show();
                     return;

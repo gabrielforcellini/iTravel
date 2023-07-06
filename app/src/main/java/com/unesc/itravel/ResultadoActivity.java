@@ -2,6 +2,7 @@ package com.unesc.itravel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -9,11 +10,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.unesc.itravel.api.Api;
+import com.unesc.itravel.api.model.post.ViagemPost;
+import com.unesc.itravel.api.model.post.result.Resposta;
 import com.unesc.itravel.database.DAO.DadosUserDAO;
 import com.unesc.itravel.database.DAO.EntretenimentoDAO;
 import com.unesc.itravel.database.DAO.HospedagemDAO;
@@ -26,6 +31,11 @@ import com.unesc.itravel.database.model.Hospedagem;
 import com.unesc.itravel.database.model.Refeicao;
 import com.unesc.itravel.database.model.Resultado;
 import com.unesc.itravel.database.model.TarifaAerea;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResultadoActivity extends AppCompatActivity {
     private Button btn_next;
@@ -114,5 +124,40 @@ public class ResultadoActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(ResultadoActivity.this, "Erro ao mostrar dados.", Toast.LENGTH_SHORT).show();
         }
+
+        ViagemPost viagemPost = new ViagemPost();
+        viagemPost.setId(preferences.getInt("KEY_ID", 0));
+        viagemPost.setDuracaoViagem(dadosUser.getQtd_dias());
+        viagemPost.setTotalViajantes(dadosUser.getViajantes());
+        viagemPost.setCustoPorPessoa(total_pessoas);
+        viagemPost.setCustoTotalViagem(total);
+        viagemPost.setLocal("Florianopolis");
+        viagemPost.setIdConta(preferences.getLong("id_dados", 0));
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(ResultadoActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Aguarde");
+        pDialog.setContentText("Enviando resultados ao servidor ...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        Toast.makeText(ResultadoActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+
+        Api.postViagem(viagemPost, new Callback<Resposta>() {
+            @Override
+            public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                if (response != null && response.isSuccessful()) {
+                    pDialog.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Resposta> call, Throwable t) {
+                pDialog.cancel();
+                t.printStackTrace();
+            }
+        });
+
+
     }
 }

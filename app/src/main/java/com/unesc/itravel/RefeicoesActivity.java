@@ -83,7 +83,7 @@ public class RefeicoesActivity extends AppCompatActivity {
                     refeicaoDAO.insert(refeicao);
 
                     ViagemCustoRefeicaoPost custoRefeicaoPost = new ViagemCustoRefeicaoPost();
-                    custoRefeicaoPost.setId(19);
+                    custoRefeicaoPost.setId(preferences.getInt("KEY_ID", 0));
                     custoRefeicaoPost.setRefeicoesDia(Math.round(refeicao_dia));
                     custoRefeicaoPost.setCustoRefeicao(total);
                     custoRefeicaoPost.setViagemId(id_dados);
@@ -101,8 +101,8 @@ public class RefeicoesActivity extends AppCompatActivity {
                             if (response != null && response.isSuccessful()) {
                                 pDialog.cancel();
                                 Resposta resposta = response.body();
-                                System.out.println("*********");
-                                Toast.makeText(RefeicoesActivity.this, "Custos gasolina gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RefeicoesActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RefeicoesActivity.this, HospedagemActivity.class));
                             }
                         }
 
@@ -113,9 +113,6 @@ public class RefeicoesActivity extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     });
-
-                    Toast.makeText(RefeicoesActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RefeicoesActivity.this, HospedagemActivity.class));
                 } catch (Exception e) {
                     Toast.makeText(RefeicoesActivity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();
                 }

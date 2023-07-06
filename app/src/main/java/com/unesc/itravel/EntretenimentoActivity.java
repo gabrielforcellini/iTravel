@@ -79,7 +79,7 @@ public class EntretenimentoActivity extends AppCompatActivity {
                     entretenimentoDAO.insert(entretenimento);
 
                     ViagemCustoEntretenimentoPost entretenimentoPost = new ViagemCustoEntretenimentoPost();
-                    entretenimentoPost.setId(19);
+                    entretenimentoPost.setId(preferences.getInt("KEY_ID", 0));
                     entretenimentoPost.setEntretenimento(edt_total.getText().toString());
                     entretenimentoPost.setValor(valor_entretenimento);
                     entretenimentoPost.setViagemId(id_dados);
@@ -97,8 +97,8 @@ public class EntretenimentoActivity extends AppCompatActivity {
                             if (response != null && response.isSuccessful()) {
                                 pDialog.cancel();
                                 Resposta resposta = response.body();
-                                System.out.println("*********");
-                                Toast.makeText(EntretenimentoActivity.this, "Custos gasolina gravados com sucesso na API.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EntretenimentoActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(EntretenimentoActivity.this, ControleGastosActivity.class));
                             }
                         }
 
@@ -109,9 +109,6 @@ public class EntretenimentoActivity extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     });
-
-                    Toast.makeText(EntretenimentoActivity.this, "Dados gravados com sucesso.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(EntretenimentoActivity.this, ControleGastosActivity.class));
                 } catch (Exception e) {
                     Toast.makeText(EntretenimentoActivity.this, "Erro ao gravar os dados.", Toast.LENGTH_SHORT).show();
                 }
