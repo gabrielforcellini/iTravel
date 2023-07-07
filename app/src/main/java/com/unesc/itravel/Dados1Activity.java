@@ -103,7 +103,7 @@ public class Dados1Activity extends AppCompatActivity {
                                 if (response != null && response.isSuccessful()) {
                                     pDialog.cancel();
                                     Resposta resposta = response.body();
-                                    preferences.edit().putInt("KEY_ID", resposta.getChavePrimaria()).apply();
+                                    preferences.edit().putInt("KEY_ID", Integer.parseInt(resposta.getDados())).apply();
 
                                     RadioButton radioButtonSelecionado = findViewById(radioButtonId);
 

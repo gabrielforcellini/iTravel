@@ -102,8 +102,8 @@ public class ResultadoActivity extends AppCompatActivity {
         DadosUser dadosUser = dadosUserDAO.findOne(idDados);
 
         double totalHospedagem = hospedagem.getTotal();
-        double totalTarifaAerea = tarifaAerea.getTotal();
-        double totalRefeicoes = refeicao.getTotal();
+        double totalTarifaAerea = tarifaAerea != null && tarifaAerea.getTotal() != null ? tarifaAerea.getTotal() : 0.00;
+        double totalRefeicoes = refeicao != null ? refeicao.getTotal() : 0.00;
         double totalEntretenimento = entretenimento.getTotal();
 
         double total = totalHospedagem + totalTarifaAerea + totalRefeicoes + totalEntretenimento;
